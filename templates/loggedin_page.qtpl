@@ -1,0 +1,44 @@
+{% func LoggedinPage(data LoggedinData) %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Latest compiled and minified CSS -->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+
+    <link href="https://lipis.github.io/bootstrap-social/bootstrap-social.css" rel="stylesheet" >
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12" style="text-align:center">
+          <h1>Beego OAuth 2.0 Demo</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4"></div>
+              
+        <div class="col-sm-4 social-buttons">
+          <h3 class="text-center">User Account</h3>
+
+          <p><strong>Name:</strong> {%s data.User.Name.Formatted %}</p>
+          <p><strong>Email:</strong> {%s data.PrimaryEmail.Value %}</p>
+
+          <button type="button" class="btn btn-default btn-md" style="width:100%">
+            <a href="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
+          </button>
+
+          <p style="margin-top:1em;width:100%;text-align:center"><a href="https://{%s DemoRepoURI %}">{%s DemoRepoURI %}</a>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endfunc %}
