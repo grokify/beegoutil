@@ -1,10 +1,12 @@
-# Beego OAuth 2.0 Demo
+# Beego OAuth 2.0 Example
 
 [![Go Report Card][goreport-svg]][goreport-link]
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 
-OAuth 2.0 demo app using the following:
+A basic OAuth 2.0 example app for Google and Facebook using Beego.
+
+The following are used for in this example app:
 
 * Core
   * [Beego](https://beego.me/)
@@ -24,7 +26,7 @@ Decide on the hostname for your app which will be used in the OAuth 2.0 URI.
 
 The redirect URI is `oauth2callback`. For example, if your app URL is `https://example.com`, your redirect URI will be `https://example.com/oauth2callback`.
 
-If you do not have an Internet accessible hostname, you can use ngrok for testing.
+If you do not have an Internet accessible hostname, you can use [ngrok](https://ngrok.com/) for testing.
 
 ### Configure Google and Facebook
 
@@ -37,7 +39,7 @@ Login to the Google and Facebbook developer consoles to configure your apps with
 3. Set up your `app.conf` file.
 4. Run the app
 
-You can do the above with the following steps:
+You can do the above with the following steps. See the next section for more detailed information on the configuration file.
 
 ```bash
 $ git clone https://github.com/grokify/beego-oauth2-demo
@@ -47,6 +49,16 @@ $ cp app.conf.sample app.conf
 $ vim app.conf
 $ bee run
 ```
+
+#### Configuration File
+
+This is a basic Beego config file with additional properties. Specifically, it has the following 3 properties:
+
+| Property | Description |
+|----------|-------------|
+| `oauth2configgoogle` | The Google Developers Console `client_credentials.json` file information. This is read directly by OAuth2's `google.ConfigFromJSON()` function. |
+| `oauth2configfacebook` | This uses the format used by `oauth2.Config` |
+| `oauth2redirecturi` | This app's OAuth2 redirect URI which has the path `/oauth2callback`, e.g. `https://example.com/oauth2callback` |
 
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/beego-oauth2-demo
  [goreport-link]: https://goreportcard.com/report/github.com/grokify/beego-oauth2-demo
