@@ -1,10 +1,10 @@
-# Beego OAuth 2.0 Example
+# Beego OAuth 2.0 Demo
 
 [![Go Report Card][goreport-svg]][goreport-link]
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 
-A basic [Beego](https://beego.me/) example app for OAuth 2.0 using Google and Facebook. 
+A [Beego](https://beego.me/) example app to demo OAuth 2.0 using Google and Facebook. 
 
 The following are used in this example app:
 
