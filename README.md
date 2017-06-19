@@ -4,12 +4,11 @@
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
 
-A basic OAuth 2.0 example app for Google and Facebook using Beego.
+A basic [Beego](https://beego.me/) example app for OAuth 2.0 using Google and Facebook. 
 
-The following are used for in this example app:
+The following are used in this example app:
 
-* Core
-  * [Beego](https://beego.me/)
+* OAuth 2.0
   * [OAuth2](https://github.com/golang/oauth2)
   * [OAuth2 Util](https://github.com/grokify/oauth2-util-go)
 * Rendering
