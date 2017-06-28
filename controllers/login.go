@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/grokify/oauth2-util-go/googleutil"
 	"github.com/grokify/oauth2-util-go/scimutil"
+	googleutil "github.com/grokify/oauth2-util-go/services/google"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/facebook"
 	"golang.org/x/oauth2/google"

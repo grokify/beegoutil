@@ -5,9 +5,9 @@ import (
 	"regexp"
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/oauth2-util-go/facebookutil"
-	"github.com/grokify/oauth2-util-go/googleutil"
 	"github.com/grokify/oauth2-util-go/scimutil"
+	facebookutil "github.com/grokify/oauth2-util-go/services/facebook"
+	googleutil "github.com/grokify/oauth2-util-go/services/google"
 	"golang.org/x/oauth2"
 
 	"github.com/astaxie/beego"
