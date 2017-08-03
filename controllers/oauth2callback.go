@@ -5,6 +5,7 @@ import (
 	"regexp"
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/oauth2-util-go"
 	"github.com/grokify/oauth2-util-go/scimutil"
 	facebookutil "github.com/grokify/oauth2-util-go/services/facebook"
 	googleutil "github.com/grokify/oauth2-util-go/services/google"
@@ -39,87 +40,50 @@ func (c *Oauth2CallbackController) Get() {
 		authCode := c.GetString("code")
 		switch service {
 		case "facebook":
-			c.LoginFacebook(authCode)
+			o2Config, err := FacebookOAuth2Config()
+			if err != nil {
+				panic(fmt.Sprintf("Facebook OAuth 2.0 Config Error [%v]\n", err))
+			}
+			c.Login(authCode, o2Config, &facebookutil.ClientUtil{})
 		case "google":
-			c.LoginGoogle(authCode)
+			o2Config, err := GoogleOAuth2Config()
+			if err != nil {
+				panic(fmt.Sprintf("Google OAuth 2.0 Config Error [%v]\n", err))
+			}
+			c.Login(authCode, o2Config, &googleutil.ClientUtil{})
 		case "ringcentral":
-			c.LoginRingCentral(authCode)
+			o2Config, err := RingCentralOAuth2Config()
+			if err != nil {
+				panic(fmt.Sprintf("RingCentral OAuth 2.0 Config Error [%v]\n", err))
+			}
+			c.Login(authCode, o2Config, &rcutil.ClientUtil{})
 		}
 	}
 
 	c.TplName = "blank.tpl"
 }
 
-func (c *Oauth2CallbackController) LoginFacebook(authCode string) {
+func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util oauth2util.OAuth2Util) {
 	log := c.Logger
-	fbOAuth2Config, err := FacebookOAuth2Config()
-	if err != nil {
-		panic(fmt.Sprintf("Facebook OAuth 2.0 Config Error [%v]\n", err))
-	}
-	// Handle the exchange code to initiate a transport.
-	tok, err := fbOAuth2Config.Exchange(oauth2.NoContext, authCode)
-	if err != nil {
-		log.Error(fmt.Sprintf("%v\n", err))
-	}
-	fmtutil.PrintJSON(tok)
-
-	client := fbOAuth2Config.Client(oauth2.NoContext, tok)
-	fbclientutil := facebookutil.NewClientUtil(client)
-
-	scimUser, err := fbclientutil.GetSCIMUser()
-	if err == nil {
-		c.Login(scimUser)
-	}
-}
-
-func (c *Oauth2CallbackController) LoginGoogle(authCode string) {
-	log := c.Logger
-	googleOAuth2Config, err := GoogleOAuth2Config()
-	if err != nil {
-		panic(fmt.Sprintf("Google OAuth 2.0 Config Error [%v]\n", err))
-	}
 
 	// Handle the exchange code to initiate a transport.
-	tok, err := googleOAuth2Config.Exchange(oauth2.NoContext, authCode)
+	tok, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
 		log.Error(fmt.Sprintf("%v\n", err))
 	}
 
-	client := googleOAuth2Config.Client(oauth2.NoContext, tok)
-	googleclientutil := googleutil.NewClientUtil(client)
+	o2Util.SetClient(o2Config.Client(oauth2.NoContext, tok))
 
-	scimUser, err := googleclientutil.GetSCIMUser()
+	scimUser, err := o2Util.GetSCIMUser()
 	if err == nil {
-		c.Login(scimUser)
-	}
-}
-
-func (c *Oauth2CallbackController) LoginRingCentral(authCode string) {
-	log := c.Logger
-	rcOAuth2Config, err := RingCentralOAuth2Config()
-	if err != nil {
-		panic(fmt.Sprintf("RingCentral OAuth 2.0 Config Error [%v]\n", err))
-	}
-
-	// Handle the exchange code to initiate a transport.
-	tok, err := rcOAuth2Config.Exchange(oauth2.NoContext, authCode)
-	if err != nil {
-		log.Error(fmt.Sprintf("%v\n", err))
-	}
-
-	client := rcOAuth2Config.Client(oauth2.NoContext, tok)
-	rcclientutil := rcutil.NewClientUtil(client)
-
-	scimUser, err := rcclientutil.GetSCIMUser()
-	if err == nil {
-		c.Login(scimUser)
+		c.SaveSessionUser(scimUser)
 		fmtutil.PrintJSON(scimUser)
 	} else {
 		panic(err)
 	}
 }
 
-func (c *Oauth2CallbackController) Login(scimUser scimutil.User) {
+func (c *Oauth2CallbackController) SaveSessionUser(scimUser scimutil.User) {
 	c.SetSession("user", scimUser)
 	c.SetSession("loggedIn", true)
 }
