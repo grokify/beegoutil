@@ -40,19 +40,19 @@ func (c *Oauth2CallbackController) Get() {
 		authCode := c.GetString("code")
 		switch service {
 		case "facebook":
-			o2Config, err := FacebookOAuth2Config()
+			o2Config, err := conf.FacebookOAuth2Config()
 			if err != nil {
 				panic(fmt.Sprintf("Facebook OAuth 2.0 Config Error [%v]\n", err))
 			}
 			c.Login(authCode, o2Config, &facebookutil.ClientUtil{})
 		case "google":
-			o2Config, err := GoogleOAuth2Config()
+			o2Config, err := conf.GoogleOAuth2Config()
 			if err != nil {
 				panic(fmt.Sprintf("Google OAuth 2.0 Config Error [%v]\n", err))
 			}
 			c.Login(authCode, o2Config, &googleutil.ClientUtil{})
 		case "ringcentral":
-			o2Config, err := RingCentralOAuth2Config()
+			o2Config, err := conf.RingCentralOAuth2Config()
 			if err != nil {
 				panic(fmt.Sprintf("RingCentral OAuth 2.0 Config Error [%v]\n", err))
 			}

@@ -1,16 +1,16 @@
 package controllers
 
 import (
-	"encoding/json"
+	//"encoding/json"
 	"fmt"
-	"strings"
+	//"strings"
 
 	"github.com/grokify/oauth2-util-go/scimutil"
-	googleutil "github.com/grokify/oauth2-util-go/services/google"
-	rcutil "github.com/grokify/oauth2-util-go/services/ringcentral"
-	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/facebook"
-	"golang.org/x/oauth2/google"
+	//googleutil "github.com/grokify/oauth2-util-go/services/google"
+	//rcutil "github.com/grokify/oauth2-util-go/services/ringcentral"
+	//"golang.org/x/oauth2"
+	//"golang.org/x/oauth2/facebook"
+	//"golang.org/x/oauth2/google"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -32,13 +32,19 @@ func (c *LoginController) Get() {
 	log := c.Logger
 	log.Info("Start Login Controller")
 
-	v := c.GetSession("user")
-	if v == nil {
+	s1 := c.GetSession("loggedIn")
+	s2 := c.GetSession("user")
+	if s1 == nil || s2 == nil {
 		fmt.Println("USER_LOGGED_IN_N")
 		c.LoginPage()
 	} else {
-		fmt.Println("USER_LOGGED_IN_Y")
-		c.LoggedinPage(v.(scimutil.User))
+		loggedIn := s1.(bool)
+		if loggedIn == false {
+			c.LoginPage()
+		} else {
+			fmt.Println("USER_LOGGED_IN_Y")
+			c.LoggedinPage(s2.(scimutil.User))
+		}
 	}
 }
 
@@ -49,7 +55,7 @@ func (c *LoginController) LoginPage() {
 		OAuth2RedirectURI: beego.AppConfig.String("oauth2redirecturi"),
 		DemoRepoURI:       templates.DemoRepoURI}
 
-	googleConfig, err := GoogleOAuth2Config()
+	googleConfig, err := conf.GoogleOAuth2Config()
 	if err == nil {
 		data.OAuth2ConfigGoogle = googleConfig
 
@@ -60,14 +66,14 @@ func (c *LoginController) LoginPage() {
 		log.Info(fmt.Sprintf("ERR [%v]\n", err))
 	}
 
-	fbConfig, err := FacebookOAuth2Config()
+	fbConfig, err := conf.FacebookOAuth2Config()
 	if err != nil {
 		log.Info(fmt.Sprintf("FB_OAUTH_ERR [%v]\n", err))
 	} else {
 		data.OAuth2ConfigFacebook = fbConfig
 	}
 
-	rcConfig, err := RingCentralOAuth2Config()
+	rcConfig, err := conf.RingCentralOAuth2Config()
 	if err != nil {
 		log.Info(fmt.Sprintf("RC_OAUTH_ERR [%v]\n", err))
 	} else {
@@ -86,38 +92,4 @@ func (c *LoginController) LoggedinPage(user scimutil.User) {
 	}
 
 	templates.WriteLoggedinPage(c.Ctx.ResponseWriter, data)
-}
-
-func GoogleOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String(conf.GoogleOauth2Param)
-
-	return google.ConfigFromJSON(
-		[]byte(configJson),
-		googleutil.GoogleScopeUserinfoEmail,
-		googleutil.GoogleScopeUserinfoProfile)
-}
-
-func FacebookOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String(conf.FacebookOauth2Param)
-
-	cfg := oauth2.Config{}
-	err := json.Unmarshal([]byte(configJson), &cfg)
-	if err == nil {
-		cfg.Endpoint = facebook.Endpoint
-	}
-	return &cfg, err
-}
-
-func RingCentralOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String(conf.RingCentralOauth2Param)
-
-	cfg := oauth2.Config{}
-	err := json.Unmarshal([]byte(configJson), &cfg)
-	if err != nil {
-		return &cfg, err
-	}
-	if len(strings.TrimSpace(cfg.Endpoint.AuthURL)) == 0 {
-		cfg.Endpoint = rcutil.NewEndpoint(rcutil.SandboxHostname)
-	}
-	return &cfg, err
 }
