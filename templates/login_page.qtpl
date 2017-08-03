@@ -26,6 +26,10 @@ var config = {
     facebook: {
         authUri: '{%s= data.AuthURLFacebook() %}',
         redirectUri: '{%s= data.OAuth2RedirectURI %}'
+    },
+    ringcentral: {
+        authUri: '{%s= data.AuthURLRingCentral() %}',
+        redirectUri: '{%s= data.OAuth2RedirectURI %}'
     }
 }
 
@@ -78,6 +82,12 @@ var oauth = new OAuthCode(config);
           <a class="btn btn-block btn-social btn-facebook" onclick="oauth.loginPopup('facebook'); return false;">
             <span class="fa fa-facebook"></span> Sign in with Facebook
           </a>
+
+          <div style="height:0.5em"></div>
+
+          <button type="button" class="btn btn-warning btn-md" style="width:100%" onclick="oauth.loginPopup('ringcentral'); return false;">
+            Sign in with RingCentral
+          </button>
 
           <p style="margin-top:1em;width:100%;text-align:center"><a href="https://{%s DemoRepoURI %}">{%s DemoRepoURI %}</a>
 

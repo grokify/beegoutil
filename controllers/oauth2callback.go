@@ -8,6 +8,7 @@ import (
 	"github.com/grokify/oauth2-util-go/scimutil"
 	facebookutil "github.com/grokify/oauth2-util-go/services/facebook"
 	googleutil "github.com/grokify/oauth2-util-go/services/google"
+	rcutil "github.com/grokify/oauth2-util-go/services/ringcentral"
 	"golang.org/x/oauth2"
 
 	"github.com/astaxie/beego"
@@ -34,11 +35,15 @@ func (c *Oauth2CallbackController) Get() {
 	m := regexp.MustCompile(`^([a-z]+)`).FindStringSubmatch(state)
 	if len(m) > 1 {
 		service := m[1]
+		fmt.Printf("SERVICE [%v]\n", service)
 		authCode := c.GetString("code")
-		if service == "facebook" {
+		switch service {
+		case "facebook":
 			c.LoginFacebook(authCode)
-		} else if service == "google" {
+		case "google":
 			c.LoginGoogle(authCode)
+		case "ringcentral":
+			c.LoginRingCentral(authCode)
 		}
 	}
 
@@ -59,7 +64,7 @@ func (c *Oauth2CallbackController) LoginFacebook(authCode string) {
 	fmtutil.PrintJSON(tok)
 
 	client := fbOAuth2Config.Client(oauth2.NoContext, tok)
-	fbclientutil := facebookutil.NewFacebookClientUtil(client)
+	fbclientutil := facebookutil.NewClientUtil(client)
 
 	scimUser, err := fbclientutil.GetSCIMUser()
 	if err == nil {
@@ -81,11 +86,36 @@ func (c *Oauth2CallbackController) LoginGoogle(authCode string) {
 	}
 
 	client := googleOAuth2Config.Client(oauth2.NoContext, tok)
-	googleclientutil := googleutil.NewGoogleClientUtil(client)
+	googleclientutil := googleutil.NewClientUtil(client)
 
 	scimUser, err := googleclientutil.GetSCIMUser()
 	if err == nil {
 		c.Login(scimUser)
+	}
+}
+
+func (c *Oauth2CallbackController) LoginRingCentral(authCode string) {
+	log := c.Logger
+	rcOAuth2Config, err := RingCentralOAuth2Config()
+	if err != nil {
+		panic(fmt.Sprintf("RingCentral OAuth 2.0 Config Error [%v]\n", err))
+	}
+
+	// Handle the exchange code to initiate a transport.
+	tok, err := rcOAuth2Config.Exchange(oauth2.NoContext, authCode)
+	if err != nil {
+		log.Error(fmt.Sprintf("%v\n", err))
+	}
+
+	client := rcOAuth2Config.Client(oauth2.NoContext, tok)
+	rcclientutil := rcutil.NewClientUtil(client)
+
+	scimUser, err := rcclientutil.GetSCIMUser()
+	if err == nil {
+		c.Login(scimUser)
+		fmtutil.PrintJSON(scimUser)
+	} else {
+		panic(err)
 	}
 }
 

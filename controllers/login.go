@@ -3,9 +3,11 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/grokify/oauth2-util-go/scimutil"
 	googleutil "github.com/grokify/oauth2-util-go/services/google"
+	rcutil "github.com/grokify/oauth2-util-go/services/ringcentral"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/facebook"
 	"golang.org/x/oauth2/google"
@@ -16,6 +18,8 @@ import (
 	"github.com/grokify/beego-oauth2-demo/conf"
 	"github.com/grokify/beego-oauth2-demo/templates"
 )
+
+const ()
 
 type LoginController struct {
 	beego.Controller
@@ -63,6 +67,13 @@ func (c *LoginController) LoginPage() {
 		data.OAuth2ConfigFacebook = fbConfig
 	}
 
+	rcConfig, err := RingCentralOAuth2Config()
+	if err != nil {
+		log.Info(fmt.Sprintf("RC_OAUTH_ERR [%v]\n", err))
+	} else {
+		data.OAuth2ConfigRingCentral = rcConfig
+	}
+
 	templates.WriteLoginPage(c.Ctx.ResponseWriter, data)
 }
 
@@ -78,7 +89,7 @@ func (c *LoginController) LoggedinPage(user scimutil.User) {
 }
 
 func GoogleOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String("oauth2configgoogle")
+	configJson := beego.AppConfig.String(conf.GoogleOauth2Param)
 
 	return google.ConfigFromJSON(
 		[]byte(configJson),
@@ -87,12 +98,26 @@ func GoogleOAuth2Config() (*oauth2.Config, error) {
 }
 
 func FacebookOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String("oauth2configfacebook")
+	configJson := beego.AppConfig.String(conf.FacebookOauth2Param)
 
 	cfg := oauth2.Config{}
 	err := json.Unmarshal([]byte(configJson), &cfg)
 	if err == nil {
 		cfg.Endpoint = facebook.Endpoint
+	}
+	return &cfg, err
+}
+
+func RingCentralOAuth2Config() (*oauth2.Config, error) {
+	configJson := beego.AppConfig.String(conf.RingCentralOauth2Param)
+
+	cfg := oauth2.Config{}
+	err := json.Unmarshal([]byte(configJson), &cfg)
+	if err != nil {
+		return &cfg, err
+	}
+	if len(strings.TrimSpace(cfg.Endpoint.AuthURL)) == 0 {
+		cfg.Endpoint = rcutil.NewEndpoint(rcutil.SandboxHostname)
 	}
 	return &cfg, err
 }

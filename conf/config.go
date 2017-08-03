@@ -5,6 +5,12 @@ import (
 	"github.com/astaxie/beego/session"
 )
 
+const (
+	GoogleOauth2Param      = "oauth2configgoogle"
+	FacebookOauth2Param    = "oauth2configfacebook"
+	RingCentralOauth2Param = "oauth2configringcentral"
+)
+
 func InitLogger() *logs.BeeLogger {
 	log := logs.NewLogger()
 	log.SetLogger(logs.AdapterConsole)

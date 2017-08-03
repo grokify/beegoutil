@@ -55,9 +55,22 @@ This is a basic Beego config file with additional properties. Specifically, it h
 
 | Property | Description |
 |----------|-------------|
-| `oauth2configgoogle` | The Google Developers Console `client_credentials.json` file information. This is read directly by OAuth2's `google.ConfigFromJSON()` function. |
-| `oauth2configfacebook` | This uses the format used by `oauth2.Config` |
 | `oauth2redirecturi` | This app's OAuth2 redirect URI which has the path `/oauth2callback`, e.g. `https://example.com/oauth2callback` |
+| `oauth2configgoogle` | The [Google Developers Console](https://console.developers.google.com/) `client_credentials.json` file information. Nagivate to "API Manager" > "Credentials" > "OAuth 2.0 client IDs" > <Your Credential> > "Download JSON". This is read directly by OAuth2's `google.ConfigFromJSON()` function. |
+| `oauth2configfacebook` | This uses the format used by `oauth2.Config` |
+
+## References
+
+### Google Auth Credentials
+
+App credentials are created an managed using the [Google Developers Console](https://console.developers.google.com/). To create an app, do the following:
+
+1. Navigate to [Google Developers Console](https://console.developers.google.com/)
+1. Click "API Manager"
+1. Create / Select a Project
+1. Click "Credentials"
+1. Create / Select OAuth 2.0 client IDs for "Web application"
+1. Click "Download JSON"
 
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/beego-oauth2-demo
  [goreport-link]: https://goreportcard.com/report/github.com/grokify/beego-oauth2-demo
