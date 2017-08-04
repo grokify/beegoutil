@@ -1,19 +1,11 @@
 package controllers
 
 import (
-	//"encoding/json"
 	"fmt"
-	//"strings"
-
-	"github.com/grokify/oauth2-util-go/scimutil"
-	//googleutil "github.com/grokify/oauth2-util-go/services/google"
-	//rcutil "github.com/grokify/oauth2-util-go/services/ringcentral"
-	//"golang.org/x/oauth2"
-	//"golang.org/x/oauth2/facebook"
-	//"golang.org/x/oauth2/google"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	"github.com/grokify/oauth2-util-go/scimutil"
 
 	"github.com/grokify/beego-oauth2-demo/conf"
 	"github.com/grokify/beego-oauth2-demo/templates"
