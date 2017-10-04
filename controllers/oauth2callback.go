@@ -5,11 +5,11 @@ import (
 	"regexp"
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/oauth2-util-go"
-	"github.com/grokify/oauth2-util-go/scimutil"
-	facebookutil "github.com/grokify/oauth2-util-go/services/facebook"
-	googleutil "github.com/grokify/oauth2-util-go/services/google"
-	rcutil "github.com/grokify/oauth2-util-go/services/ringcentral"
+	"github.com/grokify/oauth2util-go"
+	"github.com/grokify/oauth2util-go/scimutil"
+	facebookutil "github.com/grokify/oauth2util-go/services/facebook"
+	googleutil "github.com/grokify/oauth2util-go/services/google"
+	rcutil "github.com/grokify/oauth2util-go/services/ringcentral"
 	"golang.org/x/oauth2"
 
 	"github.com/astaxie/beego"

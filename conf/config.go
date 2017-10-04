@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	googleutil "github.com/grokify/oauth2-util-go/services/google"
-	"github.com/grokify/oauth2-util-go/services/ringcentral"
+	googleutil "github.com/grokify/oauth2util-go/services/google"
+	"github.com/grokify/oauth2util-go/services/ringcentral"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/facebook"
 	"golang.org/x/oauth2/google"
