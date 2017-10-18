@@ -6,6 +6,6 @@ import (
 
 type LoggedinData struct {
 	User         scimutil.User
-	PrimaryEmail scimutil.Email
+	PrimaryEmail scimutil.Item
 	DemoRepoURI  string
 }

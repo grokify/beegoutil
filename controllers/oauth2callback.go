@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"regexp"
 
@@ -70,6 +71,12 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 	tok, err := o2Config.Exchange(oauth2.NoContext, authCode)
 	if err != nil {
 		log.Error(fmt.Sprintf("%v\n", err))
+	}
+	bytes, err := json.Marshal(tok)
+	if err != nil {
+		log.Error(fmt.Sprintf("%v\n", err))
+	} else {
+		log.Info(fmt.Sprintf("TOKEN:\n%v\n", string(bytes)))
 	}
 
 	o2Util.SetClient(o2Config.Client(oauth2.NoContext, tok))

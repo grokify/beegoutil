@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strings"
 
-	googleutil "github.com/grokify/oauth2util-go/services/google"
+	gs "github.com/grokify/oauth2util-go/services/google"
 	"github.com/grokify/oauth2util-go/services/ringcentral"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/facebook"
@@ -52,8 +52,10 @@ func GoogleOAuth2Config() (*oauth2.Config, error) {
 
 	return google.ConfigFromJSON(
 		[]byte(configJson),
-		googleutil.GoogleScopeUserinfoEmail,
-		googleutil.GoogleScopeUserinfoProfile)
+		gs.UserinfoEmail,
+		gs.UserinfoProfile,
+		gs.Spreadsheets,
+		gs.Drive)
 }
 
 func RingCentralOAuth2Config() (*oauth2.Config, error) {
