@@ -39,32 +39,33 @@ func (c *Oauth2CallbackController) Get() {
 		service := m[1]
 		fmt.Printf("SERVICE [%v]\n", service)
 		authCode := c.GetString("code")
+		tokenPath := conf.GetTokenPath(service)
 		switch service {
 		case "facebook":
 			o2Config, err := conf.FacebookOAuth2Config()
 			if err != nil {
 				panic(fmt.Sprintf("Facebook OAuth 2.0 Config Error [%v]\n", err))
 			}
-			c.Login(authCode, o2Config, &facebookutil.ClientUtil{})
+			c.Login(authCode, o2Config, &facebookutil.ClientUtil{}, tokenPath)
 		case "google":
 			o2Config, err := conf.GoogleOAuth2Config()
 			if err != nil {
 				panic(fmt.Sprintf("Google OAuth 2.0 Config Error [%v]\n", err))
 			}
-			c.Login(authCode, o2Config, &googleutil.ClientUtil{})
+			c.Login(authCode, o2Config, &googleutil.ClientUtil{}, tokenPath)
 		case "ringcentral":
 			o2Config, err := conf.RingCentralOAuth2Config()
 			if err != nil {
 				panic(fmt.Sprintf("RingCentral OAuth 2.0 Config Error [%v]\n", err))
 			}
-			c.Login(authCode, o2Config, &rcutil.ClientUtil{})
+			c.Login(authCode, o2Config, &rcutil.ClientUtil{}, tokenPath)
 		}
 	}
 
 	c.TplName = "blank.tpl"
 }
 
-func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util oauth2util.OAuth2Util) {
+func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util oauth2util.OAuth2Util, tokenPath string) {
 	log := c.Logger
 
 	// Handle the exchange code to initiate a transport.
@@ -77,6 +78,10 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		log.Error(fmt.Sprintf("%v\n", err))
 	} else {
 		log.Info(fmt.Sprintf("TOKEN:\n%v\n", string(bytes)))
+		err := oauth2util.WriteTokenFile(tokenPath, tok)
+		if err != nil {
+			log.Error(fmt.Sprintf("%v\n", err))
+		}
 	}
 
 	o2Util.SetClient(o2Config.Client(oauth2.NoContext, tok))

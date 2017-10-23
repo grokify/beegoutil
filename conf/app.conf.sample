@@ -9,3 +9,7 @@ oauth2configgoogle = {"web":{"client_id":"1234567890.apps.googleusercontent.com"
 oauth2configfacebook = {"ClientID":"1234567890","ClientSecret":"1234567890","RedirectURL":"https://example.com/oauth2callback","Scopes":["email","public_profile"]}
 
 oauth2configringcentral = {"ClientID":"1234567890","ClientSecret":"1234567890","Endpoint":{"AuthURL":"https://platform.devtest.ringcentral.com/restapi/oauth/authorize","TokenURL":"https://platform.devtest.ringcentral.com/restapi/oauth/token"},"RedirectURL":"https://example.com/oauth2callback"}
+
+oauth2tokenpathgoogle=/path/to/token_google.json
+oauth2tokenpathfacebook=/path/to/token_facebook.json
+oauth2tokenpathringcentral=/path/to/token_ringcentral.json
