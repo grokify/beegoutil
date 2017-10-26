@@ -5,7 +5,7 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"github.com/grokify/oauth2util-go/scimutil"
+	"github.com/grokify/oauth2util/scimutil"
 
 	"github.com/grokify/beego-oauth2-demo/conf"
 	"github.com/grokify/beego-oauth2-demo/templates"

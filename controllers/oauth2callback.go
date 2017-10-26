@@ -6,11 +6,11 @@ import (
 	"regexp"
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/oauth2util-go"
-	"github.com/grokify/oauth2util-go/scimutil"
-	facebookutil "github.com/grokify/oauth2util-go/services/facebook"
-	googleutil "github.com/grokify/oauth2util-go/services/google"
-	rcutil "github.com/grokify/oauth2util-go/services/ringcentral"
+	"github.com/grokify/oauth2util"
+	facebookutil "github.com/grokify/oauth2util/facebook"
+	googleutil "github.com/grokify/oauth2util/google"
+	rcutil "github.com/grokify/oauth2util/ringcentral"
+	"github.com/grokify/oauth2util/scimutil"
 	"golang.org/x/oauth2"
 
 	"github.com/astaxie/beego"

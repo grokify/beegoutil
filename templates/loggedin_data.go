@@ -1,7 +1,7 @@
 package templates
 
 import (
-	"github.com/grokify/oauth2util-go/scimutil"
+	"github.com/grokify/oauth2util/scimutil"
 )
 
 type LoggedinData struct {
