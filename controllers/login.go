@@ -11,18 +11,21 @@ import (
 	"github.com/grokify/beego-oauth2-demo/templates"
 )
 
-const ()
-
 type LoginController struct {
 	beego.Controller
 	Logger *logs.BeeLogger
 }
 
 func (c *LoginController) Get() {
-	conf.InitSession()
 	c.Logger = conf.InitLogger()
 	log := c.Logger
 	log.Info("Start Login Controller")
+
+	err := conf.InitOAuth2Config()
+	if err != nil {
+		log.Info(fmt.Sprintf("ERR [%v]\n", err))
+	}
+	conf.InitSession()
 
 	s1 := c.GetSession("loggedIn")
 	s2 := c.GetSession("user")
@@ -47,7 +50,7 @@ func (c *LoginController) LoginPage() {
 		OAuth2RedirectURI: beego.AppConfig.String("oauth2redirecturi"),
 		DemoRepoURI:       templates.DemoRepoURI}
 
-	googleConfig, err := conf.GoogleOAuth2Config()
+	googleConfig, err := conf.OAuth2Configs.Get("google")
 	if err == nil {
 		data.OAuth2ConfigGoogle = googleConfig
 
@@ -58,14 +61,14 @@ func (c *LoginController) LoginPage() {
 		log.Info(fmt.Sprintf("ERR [%v]\n", err))
 	}
 
-	fbConfig, err := conf.FacebookOAuth2Config()
+	fbConfig, err := conf.OAuth2Configs.Get("facebook")
 	if err != nil {
 		log.Info(fmt.Sprintf("FB_OAUTH_ERR [%v]\n", err))
 	} else {
 		data.OAuth2ConfigFacebook = fbConfig
 	}
 
-	rcConfig, err := conf.RingCentralOAuth2Config()
+	rcConfig, err := conf.OAuth2Configs.Get("ringcentral")
 	if err != nil {
 		log.Info(fmt.Sprintf("RC_OAUTH_ERR [%v]\n", err))
 	} else {

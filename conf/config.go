@@ -1,15 +1,8 @@
 package conf
 
 import (
-	"encoding/json"
-	"strings"
-
-	gs "github.com/grokify/oauth2util/google"
-	"github.com/grokify/oauth2util/ringcentral"
-	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/facebook"
-	"golang.org/x/oauth2/google"
-	"google.golang.org/api/slides/v1"
+	"github.com/grokify/gotilla/strings/stringsutil"
+	ou "github.com/grokify/oauth2util"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -26,17 +19,21 @@ const (
 	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral"
 )
 
+var OAuth2Configs = ou.NewAppConfigs()
+
 func GetTokenPath(service string) string {
+	tokenVar := ""
 	switch service {
 	case "facebook":
-		return beego.AppConfig.String(FacebookOauth2TokenPath)
+		tokenVar = FacebookOauth2TokenPath
 	case "google":
-		return beego.AppConfig.String(GoogleOauth2TokenPath)
+		tokenVar = GoogleOauth2TokenPath
 	case "ringcentral":
-		return beego.AppConfig.String(RingcentralOauth2TokenPath)
+		tokenVar = RingcentralOauth2TokenPath
 	default:
 		return ""
 	}
+	return beego.AppConfig.String(tokenVar)
 }
 
 func InitLogger() *logs.BeeLogger {
@@ -54,41 +51,26 @@ func InitSession() {
 	go globalSessions.GC()
 }
 
-func FacebookOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String(FacebookOauth2Param)
-
-	cfg := oauth2.Config{}
-	err := json.Unmarshal([]byte(configJson), &cfg)
-	if err == nil {
-		cfg.Endpoint = facebook.Endpoint
+func InitOAuth2Config() error {
+	oauth2servicesraw := beego.AppConfig.String("oauth2services")
+	oauth2services := stringsutil.SplitTrimSpace(oauth2servicesraw, ",")
+	for _, svc := range oauth2services {
+		param := ""
+		switch svc {
+		case "facebook":
+			param = FacebookOauth2Param
+		case "google":
+			param = GoogleOauth2Param
+		case "ringcentral":
+			param = RingCentralOauth2Param
+		default:
+			continue
+		}
+		configJson := beego.AppConfig.String(param)
+		err := OAuth2Configs.AddAppConfigWrapperBytes(svc, []byte(configJson))
+		if err != nil {
+			return err
+		}
 	}
-	return &cfg, err
-}
-
-// 		gs.Spreadsheets,gs.Drive
-
-func GoogleOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String(GoogleOauth2Param)
-
-	return google.ConfigFromJSON(
-		[]byte(configJson),
-		gs.UserinfoEmail,
-		gs.UserinfoProfile,
-		slides.DriveScope,
-		slides.PresentationsScope,
-	)
-}
-
-func RingCentralOAuth2Config() (*oauth2.Config, error) {
-	configJson := beego.AppConfig.String(RingCentralOauth2Param)
-
-	cfg := oauth2.Config{}
-	err := json.Unmarshal([]byte(configJson), &cfg)
-	if err != nil {
-		return &cfg, err
-	}
-	if len(strings.TrimSpace(cfg.Endpoint.AuthURL)) == 0 {
-		cfg.Endpoint = ringcentral.NewEndpoint(ringcentral.SandboxHostname)
-	}
-	return &cfg, err
+	return nil
 }

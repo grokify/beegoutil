@@ -11,6 +11,7 @@ var globalSessions *session.Manager
 func init() {
 	beego.Router("/test", &controllers.MainController{})
 	beego.Router("/", &controllers.LoginController{})
+	beego.Router("/callback", &controllers.Oauth2CallbackController{})
 	beego.Router("/oauth2callback", &controllers.Oauth2CallbackController{})
 	beego.Router("/logout", &controllers.LogoutController{})
 }

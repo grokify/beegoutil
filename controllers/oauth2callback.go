@@ -42,19 +42,19 @@ func (c *Oauth2CallbackController) Get() {
 		tokenPath := conf.GetTokenPath(service)
 		switch service {
 		case "facebook":
-			o2Config, err := conf.FacebookOAuth2Config()
+			o2Config, err := conf.OAuth2Configs.Get(service)
 			if err != nil {
 				panic(fmt.Sprintf("Facebook OAuth 2.0 Config Error [%v]\n", err))
 			}
 			c.Login(authCode, o2Config, &facebookutil.ClientUtil{}, tokenPath)
 		case "google":
-			o2Config, err := conf.GoogleOAuth2Config()
+			o2Config, err := conf.OAuth2Configs.Get(service)
 			if err != nil {
 				panic(fmt.Sprintf("Google OAuth 2.0 Config Error [%v]\n", err))
 			}
 			c.Login(authCode, o2Config, &googleutil.ClientUtil{}, tokenPath)
 		case "ringcentral":
-			o2Config, err := conf.RingCentralOAuth2Config()
+			o2Config, err := conf.OAuth2Configs.Get(service)
 			if err != nil {
 				panic(fmt.Sprintf("RingCentral OAuth 2.0 Config Error [%v]\n", err))
 			}
@@ -63,6 +63,7 @@ func (c *Oauth2CallbackController) Get() {
 	}
 
 	c.TplName = "blank.tpl"
+	c.TplName = "index.tpl"
 }
 
 func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util oauth2util.OAuth2Util, tokenPath string) {
