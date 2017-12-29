@@ -1,6 +1,8 @@
 package conf
 
 import (
+	"fmt"
+
 	"github.com/grokify/gotilla/strings/stringsutil"
 	ms "github.com/grokify/oauth2more/multiservice"
 
@@ -15,6 +17,7 @@ const (
 	FacebookOauth2Param    = "oauth2configfacebook"
 	RingCentralOauth2Param = "oauth2configringcentral"
 
+	AhaOauth2TokenPath         = "oauth2tokenpathaha"
 	GoogleOauth2TokenPath      = "oauth2tokenpathgoogle"
 	FacebookOauth2TokenPath    = "oauth2tokenpathfacebook"
 	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral"
@@ -25,6 +28,8 @@ var OAuth2Configs = ms.NewAppConfigs()
 func GetTokenPath(service string) string {
 	tokenVar := ""
 	switch service {
+	case "aha":
+		tokenVar = AhaOauth2TokenPath
 	case "facebook":
 		tokenVar = FacebookOauth2TokenPath
 	case "google":
@@ -32,6 +37,7 @@ func GetTokenPath(service string) string {
 	case "ringcentral":
 		tokenVar = RingcentralOauth2TokenPath
 	default:
+		panic(fmt.Sprintf("Cannot find token for: %v", service))
 		return ""
 	}
 	return beego.AppConfig.String(tokenVar)

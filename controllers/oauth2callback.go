@@ -7,6 +7,7 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
+	ju "github.com/grokify/gotilla/encoding/jsonutil"
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/oauth2more"
 	"github.com/grokify/oauth2more/multiservice"
@@ -75,7 +76,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		log.Info(fmt.Sprintf("TOKEN:\n%v\n", string(bytes)))
 		err := oauth2more.WriteTokenFile(tokenPath, tok)
 		if err != nil {
-			log.Error(fmt.Sprintf("%v\n", err))
+			log.Error(fmt.Sprintf("Write Token Error: Path [%v] Error [%v]\n", tokenPath, err))
 		}
 	}
 
@@ -91,6 +92,26 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 }
 
 func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
+	log := c.Logger
+	bytes, _ := json.Marshal(scimUser)
+	log.Info(fmt.Sprintf("Saving User: %v\n", string(bytes)))
 	c.SetSession("user", scimUser)
+	log.Info("Saved_Session: User")
 	c.SetSession("loggedIn", true)
+	log.Info("Saved_Session: Login")
+
+	if false { // Verify session store.
+		s1 := c.GetSession("loggedIn")
+		if s1 == nil {
+			log.Info("Saved_Session_value: is_nil")
+		} else {
+			log.Info(fmt.Sprintf("Saved_Session_value: %v", s1))
+		}
+		s2 := c.GetSession("user")
+		if s2 == nil {
+			log.Info("Saved_Session_User_value: is_nil")
+		} else {
+			log.Info(fmt.Sprintf("Saved_Session_User_value: %v", ju.MustMarshalString(s2, true)))
+		}
+	}
 }

@@ -6,6 +6,10 @@
 
 A [Beego](https://beego.me/) example app to demo OAuth 2.0 using Google and Facebook. 
 
+![](docs/beego-oauth2-demo_login-page.png)
+
+![](docs/beego-oauth2-demo_logged-in-page.png)
+
 The following are used in this example app:
 
 * OAuth 2.0

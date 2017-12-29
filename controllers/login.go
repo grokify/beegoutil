@@ -30,14 +30,14 @@ func (c *LoginController) Get() {
 	s1 := c.GetSession("loggedIn")
 	s2 := c.GetSession("user")
 	if s1 == nil || s2 == nil {
-		fmt.Println("USER_LOGGED_IN_N")
+		log.Info("USER_LOGGED_IN_N")
 		c.LoginPage()
 	} else {
 		loggedIn := s1.(bool)
 		if loggedIn == false {
 			c.LoginPage()
 		} else {
-			fmt.Println("USER_LOGGED_IN_Y")
+			log.Info("USER_LOGGED_IN_Y")
 			c.LoggedinPage(s2.(scim.User))
 		}
 	}
