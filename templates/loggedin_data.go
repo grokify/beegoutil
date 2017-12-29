@@ -1,11 +1,11 @@
 package templates
 
 import (
-	"github.com/grokify/oauth2util/scimutil"
+	"github.com/grokify/oauth2more/scim"
 )
 
 type LoggedinData struct {
-	User         scimutil.User
-	PrimaryEmail scimutil.Item
+	User         scim.User
+	PrimaryEmail scim.Item
 	DemoRepoURI  string
 }

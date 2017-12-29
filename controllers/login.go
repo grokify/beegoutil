@@ -5,7 +5,7 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"github.com/grokify/oauth2util/scimutil"
+	"github.com/grokify/oauth2more/scim"
 
 	"github.com/grokify/beego-oauth2-demo/conf"
 	"github.com/grokify/beego-oauth2-demo/templates"
@@ -38,47 +38,21 @@ func (c *LoginController) Get() {
 			c.LoginPage()
 		} else {
 			fmt.Println("USER_LOGGED_IN_Y")
-			c.LoggedinPage(s2.(scimutil.User))
+			c.LoggedinPage(s2.(scim.User))
 		}
 	}
 }
 
 func (c *LoginController) LoginPage() {
-	log := c.Logger
-
 	data := templates.LoginData{
+		OAuth2Configs:     conf.OAuth2Configs,
 		OAuth2RedirectURI: beego.AppConfig.String("oauth2redirecturi"),
 		DemoRepoURI:       templates.DemoRepoURI}
-
-	googleConfig, err := conf.OAuth2Configs.Get("google")
-	if err == nil {
-		data.OAuth2ConfigGoogle = googleConfig
-
-		url := data.OAuth2ConfigGoogle.AuthCodeURL("state")
-		fmt.Printf("URL [%v]\n", url)
-		log.Info(fmt.Sprintf("URL [%v]\n", url))
-	} else {
-		log.Info(fmt.Sprintf("ERR [%v]\n", err))
-	}
-
-	fbConfig, err := conf.OAuth2Configs.Get("facebook")
-	if err != nil {
-		log.Info(fmt.Sprintf("FB_OAUTH_ERR [%v]\n", err))
-	} else {
-		data.OAuth2ConfigFacebook = fbConfig
-	}
-
-	rcConfig, err := conf.OAuth2Configs.Get("ringcentral")
-	if err != nil {
-		log.Info(fmt.Sprintf("RC_OAUTH_ERR [%v]\n", err))
-	} else {
-		data.OAuth2ConfigRingCentral = rcConfig
-	}
 
 	templates.WriteLoginPage(c.Ctx.ResponseWriter, data)
 }
 
-func (c *LoginController) LoggedinPage(user scimutil.User) {
+func (c *LoginController) LoggedinPage(user scim.User) {
 	data := templates.LoggedinData{
 		User:        user,
 		DemoRepoURI: templates.DemoRepoURI}

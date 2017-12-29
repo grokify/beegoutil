@@ -19,16 +19,20 @@ function sleep(ms) {
 }
 
 var config = {
+    aha: {
+        authUri: '{%s= data.AuthURL("aha") %}',
+        redirectUri: '{%s= data.OAuth2RedirectURI %}'
+    },
     google: {
-        authUri: '{%s= data.AuthURLGoogle() %}',
+        authUri: '{%s= data.AuthURL("google") %}',
         redirectUri: '{%s= data.OAuth2RedirectURI %}'
     },
     facebook: {
-        authUri: '{%s= data.AuthURLFacebook() %}',
+        authUri: '{%s= data.AuthURL("facebook") %}',
         redirectUri: '{%s= data.OAuth2RedirectURI %}'
     },
     ringcentral: {
-        authUri: '{%s= data.AuthURLRingCentral() %}',
+        authUri: '{%s= data.AuthURL("ringcentral") %}',
         redirectUri: '{%s= data.OAuth2RedirectURI %}'
     }
 }
@@ -84,9 +88,13 @@ var oauth = new OAuthCode(config);
           </a>
 
           <div style="height:0.5em"></div>
-
           <button type="button" class="btn btn-warning btn-md" style="width:100%" onclick="oauth.loginPopup('ringcentral'); return false;">
             Sign in with RingCentral
+          </button>
+
+          <div style="height:0.5em"></div>
+          <button type="button" class="btn btn-info btn-md" style="width:100%" onclick="oauth.loginPopup('aha'); return false;">
+            Sign in with Aha!
           </button>
 
           <p style="margin-top:1em;width:100%;text-align:center"><a href="https://{%s DemoRepoURI %}">{%s DemoRepoURI %}</a>

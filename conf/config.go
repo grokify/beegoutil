@@ -2,7 +2,7 @@ package conf
 
 import (
 	"github.com/grokify/gotilla/strings/stringsutil"
-	ou "github.com/grokify/oauth2util"
+	ms "github.com/grokify/oauth2more/multiservice"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
@@ -10,6 +10,7 @@ import (
 )
 
 const (
+	AhaOauth2Param         = "oauth2configaha"
 	GoogleOauth2Param      = "oauth2configgoogle"
 	FacebookOauth2Param    = "oauth2configfacebook"
 	RingCentralOauth2Param = "oauth2configringcentral"
@@ -19,7 +20,7 @@ const (
 	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral"
 )
 
-var OAuth2Configs = ou.NewAppConfigs()
+var OAuth2Configs = ms.NewAppConfigs()
 
 func GetTokenPath(service string) string {
 	tokenVar := ""
@@ -57,6 +58,8 @@ func InitOAuth2Config() error {
 	for _, svc := range oauth2services {
 		param := ""
 		switch svc {
+		case "aha":
+			param = AhaOauth2Param
 		case "facebook":
 			param = FacebookOauth2Param
 		case "google":
