@@ -44,7 +44,7 @@ func (c *Oauth2CallbackController) Get() {
 		}
 
 		var clientUtil oauth2more.OAuth2Util
-		clientUtil, err = multiservice.GetClientUtilForServiceType(serviceType)
+		clientUtil, err = multiservice.NewClientUtilForServiceType(serviceType)
 		if err != nil {
 			panic(fmt.Sprintf("%v Client Util Error [%v]\n", serviceType, err))
 		}
@@ -96,9 +96,7 @@ func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 	bytes, _ := json.Marshal(scimUser)
 	log.Info(fmt.Sprintf("Saving User: %v\n", string(bytes)))
 	c.SetSession("user", scimUser)
-	log.Info("Saved_Session: User")
 	c.SetSession("loggedIn", true)
-	log.Info("Saved_Session: Login")
 
 	if false { // Verify session store.
 		s1 := c.GetSession("loggedIn")
