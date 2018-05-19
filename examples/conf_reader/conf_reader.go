@@ -8,6 +8,7 @@ import (
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/os/osutil"
 	ou "github.com/grokify/oauth2util"
+	ms "github.com/grokify/oauth2util/multiservice"
 	"github.com/joho/godotenv"
 )
 
@@ -36,7 +37,7 @@ func main() {
 	env := osutil.Env()
 	fmtutil.PrintJSON(env)
 
-	cfgs, err := ou.EnvOAuth2ConfigMap(env, "oauth2config")
+	cfgs, err := ms.EnvOAuth2ConfigMap(env, "oauth2config")
 	if err != nil {
 		panic(err)
 	}

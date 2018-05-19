@@ -12,7 +12,7 @@ const (
 )
 
 type LoginData struct {
-	OAuth2Configs     *ms.AppConfigs
+	OAuth2Configs     *ms.ConfigSet
 	OAuth2RedirectURI string
 	DemoRepoURI       string
 }

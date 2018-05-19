@@ -133,32 +133,73 @@ var oauth = new OAuthCode(config);
         <div class="col-sm-4 social-buttons">
           <h3 class="text-center">Login</h3>
 
+          `)
+	//line login_page.qtpl:82
+	if data.OAuth2Configs.Has("google") {
+		//line login_page.qtpl:82
+		qw422016.N().S(`
           <a class="btn btn-block btn-social btn-google" onclick="oauth.loginPopup('google'); return false;">
             <span class="fa fa-google"></span> Sign in with Google
           </a>
+          `)
+		//line login_page.qtpl:86
+	}
+	//line login_page.qtpl:86
+	qw422016.N().S(`
 
+          `)
+	//line login_page.qtpl:88
+	if data.OAuth2Configs.Has("facebook") {
+		//line login_page.qtpl:88
+		qw422016.N().S(`
           <a class="btn btn-block btn-social btn-facebook" onclick="oauth.loginPopup('facebook'); return false;">
             <span class="fa fa-facebook"></span> Sign in with Facebook
           </a>
+          `)
+		//line login_page.qtpl:92
+	}
+	//line login_page.qtpl:92
+	qw422016.N().S(`
 
+
+          `)
+	//line login_page.qtpl:95
+	if data.OAuth2Configs.Has("ringcentral") {
+		//line login_page.qtpl:95
+		qw422016.N().S(`
           <div style="height:0.5em"></div>
           <button type="button" class="btn btn-warning btn-md" style="width:100%" onclick="oauth.loginPopup('ringcentral'); return false;">
             Sign in with RingCentral
           </button>
+          `)
+		//line login_page.qtpl:100
+	}
+	//line login_page.qtpl:100
+	qw422016.N().S(`
 
+          `)
+	//line login_page.qtpl:102
+	if data.OAuth2Configs.Has("aha") {
+		//line login_page.qtpl:102
+		qw422016.N().S(`
           <div style="height:0.5em"></div>
           <button type="button" class="btn btn-info btn-md" style="width:100%" onclick="oauth.loginPopup('aha'); return false;">
             Sign in with Aha!
           </button>
-
+          `)
+		//line login_page.qtpl:107
+	}
+	//line login_page.qtpl:107
+	qw422016.N().S(`
+          
           <p style="margin-top:1em;width:100%;text-align:center"><a href="https://`)
-	//line login_page.qtpl:100
+	//line login_page.qtpl:109
 	qw422016.E().S(DemoRepoURI)
-	//line login_page.qtpl:100
+	//line login_page.qtpl:109
 	qw422016.N().S(`">`)
-	//line login_page.qtpl:100
+	//line login_page.qtpl:109
 	qw422016.E().S(DemoRepoURI)
-	//line login_page.qtpl:100
+	//line login_page.qtpl:109
 	qw422016.N().S(`</a>
 
         </div>
@@ -167,31 +208,31 @@ var oauth = new OAuthCode(config);
   </body>
 </html>
 `)
-//line login_page.qtpl:107
+//line login_page.qtpl:116
 }
 
-//line login_page.qtpl:107
+//line login_page.qtpl:116
 func WriteLoginPage(qq422016 qtio422016.Writer, data LoginData) {
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	qw422016 := qt422016.AcquireWriter(qq422016)
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	StreamLoginPage(qw422016, data)
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	qt422016.ReleaseWriter(qw422016)
-//line login_page.qtpl:107
+//line login_page.qtpl:116
 }
 
-//line login_page.qtpl:107
+//line login_page.qtpl:116
 func LoginPage(data LoginData) string {
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	qb422016 := qt422016.AcquireByteBuffer()
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	WriteLoginPage(qb422016, data)
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	qs422016 := string(qb422016.B)
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	qt422016.ReleaseByteBuffer(qb422016)
-	//line login_page.qtpl:107
+	//line login_page.qtpl:116
 	return qs422016
-//line login_page.qtpl:107
+//line login_page.qtpl:116
 }

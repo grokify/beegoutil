@@ -23,7 +23,7 @@ const (
 	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral"
 )
 
-var OAuth2Configs = ms.NewAppConfigs()
+var OAuth2Configs = ms.NewConfigSet()
 
 func GetTokenPath(service string) string {
 	tokenVar := ""

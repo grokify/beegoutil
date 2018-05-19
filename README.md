@@ -1,5 +1,6 @@
 # Beego OAuth 2.0 Demo
 
+[![Build Status][build-status-svg]][build-status-link]
 [![Go Report Card][goreport-svg]][goreport-link]
 [![Docs][docs-godoc-svg]][docs-godoc-link]
 [![License][license-svg]][license-link]
@@ -76,6 +77,8 @@ App credentials are created an managed using the [Google Developers Console](htt
 1. Create / Select OAuth 2.0 client IDs for "Web application"
 1. Click "Download JSON"
 
+ [build-status-svg]: https://api.travis-ci.org/grokify/beego-oauth2-demo.svg?branch=master
+ [build-status-link]: https://travis-ci.org/grokify/beego-oauth2-demo
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/beego-oauth2-demo
  [goreport-link]: https://goreportcard.com/report/github.com/grokify/beego-oauth2-demo
  [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
