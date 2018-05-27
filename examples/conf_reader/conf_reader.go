@@ -7,8 +7,8 @@ import (
 
 	"github.com/grokify/gotilla/fmt/fmtutil"
 	"github.com/grokify/gotilla/os/osutil"
-	ou "github.com/grokify/oauth2util"
-	ms "github.com/grokify/oauth2util/multiservice"
+	ou "github.com/grokify/oauth2more"
+	ms "github.com/grokify/oauth2more/multiservice"
 	"github.com/joho/godotenv"
 )
 
