@@ -14,8 +14,8 @@ A [Beego](https://beego.me/) example app to demo OAuth 2.0 using Google and Face
 The following are used in this example app:
 
 * OAuth 2.0
-  * [OAuth2](https://github.com/golang/oauth2)
-  * [OAuth2 Util](https://github.com/grokify/oauth2-util-go)
+  * [`oauth2`](https://github.com/golang/oauth2)
+  * [`oauth2more`](https://github.com/grokify/oauth2more)
 * Rendering
   * [Bootstrap](http://getbootstrap.com/)
   * [Font Awesome](http://fontawesome.io/)

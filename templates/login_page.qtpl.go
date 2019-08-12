@@ -68,56 +68,6 @@ var config = {
 	}
 //line login_page.qtpl:28
 	qw422016.N().S(`
-
-
-    aha: {
-        authUri: '`)
-//line login_page.qtpl:32
-	qw422016.N().S(data.AuthURL("aha"))
-//line login_page.qtpl:32
-	qw422016.N().S(`',
-        redirectUri: '`)
-//line login_page.qtpl:33
-	qw422016.N().S(data.OAuth2RedirectURI)
-//line login_page.qtpl:33
-	qw422016.N().S(`'
-    },
-    google: {
-        authUri: '`)
-//line login_page.qtpl:36
-	qw422016.N().S(data.AuthURL("google"))
-//line login_page.qtpl:36
-	qw422016.N().S(`',
-        redirectUri: '`)
-//line login_page.qtpl:37
-	qw422016.N().S(data.OAuth2RedirectURI)
-//line login_page.qtpl:37
-	qw422016.N().S(`'
-    },
-    facebook: {
-        authUri: '`)
-//line login_page.qtpl:40
-	qw422016.N().S(data.AuthURL("facebook"))
-//line login_page.qtpl:40
-	qw422016.N().S(`',
-        redirectUri: '`)
-//line login_page.qtpl:41
-	qw422016.N().S(data.OAuth2RedirectURI)
-//line login_page.qtpl:41
-	qw422016.N().S(`'
-    },
-    ringcentral: {
-        authUri: '`)
-//line login_page.qtpl:44
-	qw422016.N().S(data.AuthURL("ringcentral"))
-//line login_page.qtpl:44
-	qw422016.N().S(`',
-        redirectUri: '`)
-//line login_page.qtpl:45
-	qw422016.N().S(data.OAuth2RedirectURI)
-//line login_page.qtpl:45
-	qw422016.N().S(`'
-    }
 }
 
 var OAuthCode = function(cfg) {
@@ -132,14 +82,14 @@ var OAuthCode = function(cfg) {
         var pollOAuth  = window.setInterval(function() {
 
           console.log("BASE_URI: " + '`)
-//line login_page.qtpl:60
+//line login_page.qtpl:42
 	qw422016.N().S(data.BaseUri)
-//line login_page.qtpl:60
+//line login_page.qtpl:42
 	qw422016.N().S(`');
           popup.postMessage("isoauth2redirectfinished", '`)
-//line login_page.qtpl:61
+//line login_page.qtpl:43
 	qw422016.N().S(data.BaseUri)
-//line login_page.qtpl:61
+//line login_page.qtpl:43
 	qw422016.N().S(`');
 
           /*
@@ -162,9 +112,9 @@ var oauth = new OAuthCode(config);
 function receiveMessage(event) {
   console.log("RECEIVED ["+event.origin+"]["+event.data+"]");
   if (event.origin !== '`)
-//line login_page.qtpl:82
+//line login_page.qtpl:64
 	qw422016.N().S(data.BaseUri)
-//line login_page.qtpl:82
+//line login_page.qtpl:64
 	qw422016.N().S(`') {
     return;
   }
@@ -193,71 +143,71 @@ window.addEventListener("message", receiveMessage, false);
           <h3 class="text-center">Login</h3>
 
           `)
-//line login_page.qtpl:109
+//line login_page.qtpl:91
 	if data.OAuth2Configs.Has("google0") {
-//line login_page.qtpl:109
+//line login_page.qtpl:91
 		qw422016.N().S(`
           <a class="btn btn-block btn-social btn-google" onclick="oauth.loginPopup('google0'); return false;">
             <span class="fa fa-google"></span> Sign in with Google
           </a>
           `)
-//line login_page.qtpl:113
+//line login_page.qtpl:95
 	}
-//line login_page.qtpl:113
+//line login_page.qtpl:95
 	qw422016.N().S(`
 
           `)
-//line login_page.qtpl:115
+//line login_page.qtpl:97
 	if data.OAuth2Configs.Has("facebook") {
-//line login_page.qtpl:115
+//line login_page.qtpl:97
 		qw422016.N().S(`
           <a class="btn btn-block btn-social btn-facebook" onclick="oauth.loginPopup('facebook'); return false;">
             <span class="fa fa-facebook"></span> Sign in with Facebook
           </a>
           `)
-//line login_page.qtpl:119
+//line login_page.qtpl:101
 	}
-//line login_page.qtpl:119
+//line login_page.qtpl:101
 	qw422016.N().S(`
 
           `)
-//line login_page.qtpl:121
+//line login_page.qtpl:103
 	if data.OAuth2Configs.Has("ringcentral") {
-//line login_page.qtpl:121
+//line login_page.qtpl:103
 		qw422016.N().S(`
           <div style="height:0.5em"></div>
           <button type="button" class="btn btn-warning btn-md" style="width:100%" onclick="oauth.loginPopup('ringcentral'); return false;">
             Sign in with RingCentral
           </button>
           `)
-//line login_page.qtpl:126
+//line login_page.qtpl:108
 	}
-//line login_page.qtpl:126
+//line login_page.qtpl:108
 	qw422016.N().S(`
 
           `)
-//line login_page.qtpl:128
+//line login_page.qtpl:110
 	if data.OAuth2Configs.Has("aha") {
-//line login_page.qtpl:128
+//line login_page.qtpl:110
 		qw422016.N().S(`
           <div style="height:0.5em"></div>
           <button type="button" class="btn btn-info btn-md" style="width:100%" onclick="oauth.loginPopup('aha'); return false;">
             Sign in with Aha!
           </button>
           `)
-//line login_page.qtpl:133
+//line login_page.qtpl:115
 	}
-//line login_page.qtpl:133
+//line login_page.qtpl:115
 	qw422016.N().S(`
           
           <p style="margin-top:1em;width:100%;text-align:center"><a href="https://`)
-//line login_page.qtpl:135
+//line login_page.qtpl:117
 	qw422016.E().S(DemoRepoURI)
-//line login_page.qtpl:135
+//line login_page.qtpl:117
 	qw422016.N().S(`">`)
-//line login_page.qtpl:135
+//line login_page.qtpl:117
 	qw422016.E().S(DemoRepoURI)
-//line login_page.qtpl:135
+//line login_page.qtpl:117
 	qw422016.N().S(`</a>
 
         </div>
@@ -266,31 +216,31 @@ window.addEventListener("message", receiveMessage, false);
   </body>
 </html>
 `)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 }
 
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 func WriteLoginPage(qq422016 qtio422016.Writer, data LoginData) {
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	qw422016 := qt422016.AcquireWriter(qq422016)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	StreamLoginPage(qw422016, data)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	qt422016.ReleaseWriter(qw422016)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 }
 
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 func LoginPage(data LoginData) string {
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	qb422016 := qt422016.AcquireByteBuffer()
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	WriteLoginPage(qb422016, data)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	qs422016 := string(qb422016.B)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	qt422016.ReleaseByteBuffer(qb422016)
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 	return qs422016
-//line login_page.qtpl:142
+//line login_page.qtpl:124
 }

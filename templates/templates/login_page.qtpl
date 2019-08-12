@@ -26,24 +26,6 @@ var config = {
   redirectUri: '{%s= data.OAuth2RedirectURI %}'
 },
           {% endfor %}
-
-
-    aha: {
-        authUri: '{%s= data.AuthURL("aha") %}',
-        redirectUri: '{%s= data.OAuth2RedirectURI %}'
-    },
-    google: {
-        authUri: '{%s= data.AuthURL("google") %}',
-        redirectUri: '{%s= data.OAuth2RedirectURI %}'
-    },
-    facebook: {
-        authUri: '{%s= data.AuthURL("facebook") %}',
-        redirectUri: '{%s= data.OAuth2RedirectURI %}'
-    },
-    ringcentral: {
-        authUri: '{%s= data.AuthURL("ringcentral") %}',
-        redirectUri: '{%s= data.OAuth2RedirectURI %}'
-    }
 }
 
 var OAuthCode = function(cfg) {
