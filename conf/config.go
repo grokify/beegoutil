@@ -2,84 +2,98 @@ package conf
 
 import (
 	"fmt"
+	//"strings"
 
-	"github.com/grokify/gotilla/strings/stringsutil"
+	"github.com/grokify/gotilla/net/beegoutil"
+	//"github.com/grokify/gotilla/type/stringsutil"
 	ms "github.com/grokify/oauth2more/multiservice"
 
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
-	"github.com/astaxie/beego/session"
 )
 
 const (
-	AhaOauth2Param         = "oauth2configaha"
-	GoogleOauth2Param      = "oauth2configgoogle"
-	FacebookOauth2Param    = "oauth2configfacebook"
-	RingCentralOauth2Param = "oauth2configringcentral"
-
+	OAuth2TokenCfgValPrefix    = "oauth2tokenpath"
 	AhaOauth2TokenPath         = "oauth2tokenpathaha"
 	GoogleOauth2TokenPath      = "oauth2tokenpathgoogle"
 	FacebookOauth2TokenPath    = "oauth2tokenpathfacebook"
 	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral"
 )
 
+type Config struct {
+	logger *beegoutil.BeegoLogsMore
+}
+
+func NewConfig() Config {
+	return Config{}
+}
+
+func (cfg *Config) Logger() *beegoutil.BeegoLogsMore {
+	if cfg.logger != nil {
+		return cfg.logger
+	}
+	cfg.logger = beegoutil.NewBeegoLogsMoreAdapterConsole()
+	return cfg.logger
+}
+
 var OAuth2Configs = ms.NewConfigSet()
 
-func GetTokenPath(service string) string {
-	tokenVar := ""
-	switch service {
-	case "aha":
-		tokenVar = AhaOauth2TokenPath
-	case "facebook":
-		tokenVar = FacebookOauth2TokenPath
-	case "google":
-		tokenVar = GoogleOauth2TokenPath
-	case "ringcentral":
-		tokenVar = RingcentralOauth2TokenPath
-	default:
-		panic(fmt.Sprintf("Cannot find token for: %v", service))
-		return ""
-	}
+func GetTokenPath(providerKey string) string {
+	tokenVar := OAuth2TokenCfgValPrefix + providerKey
+	/*
+		tokenVar := ""
+		switch service {
+		case "aha":
+			tokenVar = AhaOauth2TokenPath
+		case "facebook":
+			tokenVar = FacebookOauth2TokenPath
+		case "google":
+			tokenVar = GoogleOauth2TokenPath
+		case "ringcentral":
+			tokenVar = RingcentralOauth2TokenPath
+		default:
+			panic(fmt.Sprintf("Cannot find token for: %v", service))
+			return ""
+		}*/
 	return beego.AppConfig.String(tokenVar)
 }
 
-func InitLogger() *logs.BeeLogger {
-	log := logs.NewLogger()
-	log.SetLogger(logs.AdapterConsole)
-	return log
-}
-
 func InitSession() {
-	sessionConfig := &session.ManagerConfig{
-		CookieName: "zoco",
-		Gclifetime: 3600,
-	}
-	globalSessions, _ := session.NewManager("memory", sessionConfig)
-	go globalSessions.GC()
+	beegoutil.InitSession("", nil)
 }
 
 func InitOAuth2Config() error {
-	oauth2servicesraw := beego.AppConfig.String("oauth2services")
-	oauth2services := stringsutil.SplitTrimSpace(oauth2servicesraw, ",")
-	for _, svc := range oauth2services {
-		param := ""
-		switch svc {
-		case "aha":
-			param = AhaOauth2Param
-		case "facebook":
-			param = FacebookOauth2Param
-		case "google":
-			param = GoogleOauth2Param
-		case "ringcentral":
-			param = RingCentralOauth2Param
-		default:
+	err := beegoutil.InitOAuth2Config(OAuth2Configs)
+	fmt.Println(len(OAuth2Configs.ConfigsMap))
+	goog := OAuth2Configs.ConfigsMap["google0"]
+	fmt.Println(goog.AuthUri)
+	if OAuth2Configs.Has("google0") {
+		fmt.Println("GOT_google0")
+	} else {
+		fmt.Println("NO_google0")
+	}
+	return err
+
+}
+
+/*
+func InitOAuth2ConfigOld() error {
+	oauth2providersraw := beego.AppConfig.String("oauth2providers")
+	oauth2providers := stringsutil.SplitTrimSpace(oauth2providersraw, ",")
+	for _, providerKey := range oauth2providers {
+		providerKey = strings.TrimSpace(providerKey)
+		if len(providerKey) == 0 {
 			continue
 		}
-		configJson := beego.AppConfig.String(param)
-		err := OAuth2Configs.AddAppConfigWrapperBytes(svc, []byte(configJson))
+		oauth2ConfigParam := "oauth2config" + providerKey
+		configJson := strings.TrimSpace(beego.AppConfig.String(oauth2ConfigParam))
+		if len(configJson) == 0 {
+			return fmt.Errorf("E_NO_CONFIG_FOR_OAUTH_PROVIDER_KEY [%v]", providerKey)
+		}
+		err := OAuth2Configs.AddConfigMoreJson(providerKey, []byte(configJson))
 		if err != nil {
 			return err
 		}
 	}
 	return nil
 }
+*/

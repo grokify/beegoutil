@@ -4,47 +4,53 @@ import (
 	"fmt"
 
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	"github.com/grokify/oauth2more/scim"
 
 	"github.com/grokify/beego-oauth2-demo/conf"
 	"github.com/grokify/beego-oauth2-demo/templates"
+	"github.com/grokify/gotilla/net/beegoutil"
 )
 
 type LoginController struct {
 	beego.Controller
-	Logger *logs.BeeLogger
+	Logger *beegoutil.BeegoLogsMore
 }
 
 func (c *LoginController) Get() {
-	c.Logger = conf.InitLogger()
+	cfg := conf.NewConfig()
+	c.Logger = cfg.Logger()
 	log := c.Logger
+
 	log.Info("Start Login Controller")
 
 	err := conf.InitOAuth2Config()
 	if err != nil {
-		log.Info(fmt.Sprintf("ERR [%v]\n", err))
+		log.Infof("ERR [%v]\n", err.Error())
 	}
 	conf.InitSession()
 
 	s1 := c.GetSession("loggedIn")
 	s2 := c.GetSession("user")
 	if s1 == nil || s2 == nil {
-		log.Info("USER_LOGGED_IN_N")
+		log.Info("I_IS_USER_LOGGED_IN [no]")
 		c.LoginPage()
 	} else {
 		loggedIn := s1.(bool)
 		if loggedIn == false {
 			c.LoginPage()
 		} else {
-			log.Info("USER_LOGGED_IN_Y")
+			log.Info("I_IS_USER_LOGGED_IN [yes]")
 			c.LoggedinPage(s2.(scim.User))
 		}
 	}
 }
 
 func (c *LoginController) LoginPage() {
+	for name, _ := range conf.OAuth2Configs.ConfigsMap {
+		fmt.Printf("NAME [%v]\n", name)
+	}
 	data := templates.LoginData{
+		BaseUri:           beego.AppConfig.String("baseuri"),
 		OAuth2Configs:     conf.OAuth2Configs,
 		OAuth2RedirectURI: beego.AppConfig.String("oauth2redirecturi"),
 		DemoRepoURI:       templates.DemoRepoURI}

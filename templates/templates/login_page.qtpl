@@ -19,6 +19,15 @@ function sleep(ms) {
 }
 
 var config = {
+          {% for key, _ := range data.OAuth2Configs.ConfigsMap %}
+
+{%s= key %}: {
+  authUri: '{%s= data.AuthURL("google0")%}',
+  redirectUri: '{%s= data.OAuth2RedirectURI %}'
+},
+          {% endfor %}
+
+
     aha: {
         authUri: '{%s= data.AuthURL("aha") %}',
         redirectUri: '{%s= data.OAuth2RedirectURI %}'
@@ -38,14 +47,20 @@ var config = {
 }
 
 var OAuthCode = function(cfg) {
-    this.config = config;
-    this.loginPopup  = function(service) {
+    var t = this;
+    t.config = config;
+    t.loginPopup  = function(service) {
         var cfg = this.config;
-        this.loginPopupUri(cfg[service]['authUri'], cfg[service]['redirectUri']);
+        t.loginPopupUri(cfg[service]['authUri'], cfg[service]['redirectUri']);
     }
-    this.loginPopupUri = function(authUri, redirectUri) {
-        var win        = window.open(authUri, 'windowname1', 'width=800, height=600'); 
-        var pollOAuth  = window.setInterval(function() { 
+    t.loginPopupUri = function(authUri, redirectUri) {
+        var popup      = window.open(authUri, 'windowname1', 'width=800, height=600'); 
+        var pollOAuth  = window.setInterval(function() {
+
+          console.log("BASE_URI: " + '{%s= data.BaseUri %}');
+          popup.postMessage("isoauth2redirectfinished", '{%s= data.BaseUri %}');
+
+          /*
             try {
                 console.log("DOCUMENT_URI: " + win.document.URL);
                 console.log("REDIRECT_URI: " + redirectUri);
@@ -56,11 +71,23 @@ var OAuthCode = function(cfg) {
                 }
             } catch(e) {
                 console.log(e)
-            }
-        }, 100);
+            }*/
+        }, 500);
     }
 }
 var oauth = new OAuthCode(config);
+
+function receiveMessage(event) {
+  console.log("RECEIVED ["+event.origin+"]["+event.data+"]");
+  if (event.origin !== '{%s= data.BaseUri %}') {
+    return;
+  }
+  if (event.data == 'oauth2redirectisfinished') {
+    location.reload();
+  }
+}
+window.addEventListener("message", receiveMessage, false);
+
     </script>
 
   </head>
@@ -79,8 +106,8 @@ var oauth = new OAuthCode(config);
         <div class="col-sm-4 social-buttons">
           <h3 class="text-center">Login</h3>
 
-          {% if data.OAuth2Configs.Has("google") %}
-          <a class="btn btn-block btn-social btn-google" onclick="oauth.loginPopup('google'); return false;">
+          {% if data.OAuth2Configs.Has("google0") %}
+          <a class="btn btn-block btn-social btn-google" onclick="oauth.loginPopup('google0'); return false;">
             <span class="fa fa-google"></span> Sign in with Google
           </a>
           {% endif %}
@@ -90,7 +117,6 @@ var oauth = new OAuthCode(config);
             <span class="fa fa-facebook"></span> Sign in with Facebook
           </a>
           {% endif %}
-
 
           {% if data.OAuth2Configs.Has("ringcentral") %}
           <div style="height:0.5em"></div>

@@ -13,9 +13,12 @@ type LogoutController struct {
 }
 
 func (c *LogoutController) Get() {
+	cfg := conf.NewConfig()
+	log := cfg.Logger()
+	c.Logger = log.Logger
+
 	conf.InitSession()
-	c.Logger = conf.InitLogger()
-	log := c.Logger
+
 	log.Info("Start Login Controller")
 
 	c.SetSession("user", nil)

@@ -6,57 +6,66 @@ import (
 	"regexp"
 
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 	ju "github.com/grokify/gotilla/encoding/jsonutil"
-	"github.com/grokify/gotilla/fmt/fmtutil"
+	"github.com/grokify/gotilla/net/beegoutil"
 	"github.com/grokify/oauth2more"
 	"github.com/grokify/oauth2more/multiservice"
 	"github.com/grokify/oauth2more/scim"
 	"golang.org/x/oauth2"
 
 	"github.com/grokify/beego-oauth2-demo/conf"
+	"github.com/grokify/beego-oauth2-demo/templates"
 )
 
 type Oauth2CallbackController struct {
 	beego.Controller
-	Logger *logs.BeeLogger
+	Logger *beegoutil.BeegoLogsMore
 }
 
 func (c *Oauth2CallbackController) Get() {
 	conf.InitSession()
-	c.Logger = conf.InitLogger()
+
+	cfg := conf.NewConfig()
+	c.Logger = cfg.Logger()
 	log := c.Logger
+
 	log.Info("Start OAuth2Callback Controller")
 
 	state := c.GetString("state")
 
 	log.Info(fmt.Sprintf("STATE [%v]\n", state))
 
-	m := regexp.MustCompile(`^([a-z]+)`).FindStringSubmatch(state)
+	m := regexp.MustCompile(`^([a-z0-9]+)`).FindStringSubmatch(state)
 	if len(m) > 1 {
-		serviceType := m[1]
-		fmt.Printf("SERVICE [%v]\n", serviceType)
+		providerKey := m[1]
+		fmt.Printf("SERVICE [%v]\n", providerKey)
 		authCode := c.GetString("code")
 
-		o2Config, err := conf.OAuth2Configs.Get(serviceType)
+		o2ConfigMore, err := conf.OAuth2Configs.Get(providerKey)
 		if err != nil {
-			panic(fmt.Sprintf("%v OAuth 2.0 Config Error [%v]\n", serviceType, err))
+			panic(fmt.Sprintf("%v OAuth 2.0 Config Error [%v]\n", providerKey, err))
+		}
+		providerType, err := o2ConfigMore.ProviderType()
+		if err != nil {
+			panic(fmt.Sprintf("E_OAUTH2_CONFIG_ERR_NO_PROVIDER_KEY [%v] ERR [%v]\n", providerKey, err))
 		}
 
 		var clientUtil oauth2more.OAuth2Util
-		clientUtil, err = multiservice.NewClientUtilForServiceType(serviceType)
+		clientUtil, err = multiservice.NewClientUtilForProviderType(providerType)
 		if err != nil {
-			panic(fmt.Sprintf("%v Client Util Error [%v]\n", serviceType, err))
+			panic(fmt.Sprintf("%v CLIENT_UTIL_ERR [%v]\n", providerType, err))
 		}
 
-		tokenPath := conf.GetTokenPath(serviceType)
+		tokenPath := conf.GetTokenPath(providerKey)
 
-		fmt.Println(serviceType)
-		c.Login(authCode, o2Config, clientUtil, tokenPath)
+		fmt.Printf("PROVIDER_KEY [%v] TOKEN_PATH [%v]\n", providerKey, tokenPath)
+		c.Login(authCode, o2ConfigMore.Config(), clientUtil, tokenPath)
 	}
 
-	c.TplName = "blank.tpl"
-	c.TplName = "index.tpl"
+	data := templates.LoginData{BaseUri: beego.AppConfig.String("baseuri")}
+	templates.WriteOAuth2CallbackPage(c.Ctx.ResponseWriter, data)
+	//c.TplName = "blank.tpl"
+	//c.TplName = "index.tpl"
 }
 
 func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util oauth2more.OAuth2Util, tokenPath string) {
@@ -73,10 +82,10 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		log.Error(fmt.Sprintf("%v\n", err))
 		panic(err)
 	} else {
-		log.Info(fmt.Sprintf("TOKEN:\n%v\n", string(bytes)))
+		log.Infof("TOKEN:\n%v\n", string(bytes))
 		err := oauth2more.WriteTokenFile(tokenPath, tok)
 		if err != nil {
-			log.Error(fmt.Sprintf("Write Token Error: Path [%v] Error [%v]\n", tokenPath, err))
+			log.Errorf("E_WRITE_TOKEN_ERROR: PATH [%v] ERROR [%v]\n", tokenPath, err)
 		}
 	}
 
@@ -85,7 +94,6 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 	scimUser, err := o2Util.GetSCIMUser()
 	if err == nil {
 		c.SaveSessionUser(scimUser)
-		fmtutil.PrintJSON(scimUser)
 	} else {
 		panic(err)
 	}
@@ -94,7 +102,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 	log := c.Logger
 	bytes, _ := json.Marshal(scimUser)
-	log.Info(fmt.Sprintf("Saving User: %v\n", string(bytes)))
+	log.Infof("Saving User: %v\n", string(bytes))
 	c.SetSession("user", scimUser)
 	c.SetSession("loggedIn", true)
 
@@ -103,13 +111,13 @@ func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 		if s1 == nil {
 			log.Info("Saved_Session_value: is_nil")
 		} else {
-			log.Info(fmt.Sprintf("Saved_Session_value: %v", s1))
+			log.Infof("Saved_Session_value: %v", s1)
 		}
 		s2 := c.GetSession("user")
 		if s2 == nil {
 			log.Info("Saved_Session_User_value: is_nil")
 		} else {
-			log.Info(fmt.Sprintf("Saved_Session_User_value: %v", ju.MustMarshalString(s2, true)))
+			log.Infof("Saved_Session_User_value: %v", ju.MustMarshalString(s2, true))
 		}
 	}
 }

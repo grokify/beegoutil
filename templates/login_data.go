@@ -13,18 +13,20 @@ const (
 
 type LoginData struct {
 	OAuth2Configs     *ms.ConfigSet
+	BaseUri           string
 	OAuth2RedirectURI string
 	DemoRepoURI       string
 }
 
-func (ld *LoginData) AuthURL(service string) string {
-	c, err := ld.OAuth2Configs.Get(service)
+func (ld *LoginData) AuthURL(providerKey string) string {
+	cc, err := ld.OAuth2Configs.Get(providerKey)
 	if err != nil {
 		return ""
 	}
-	return c.AuthCodeURL(RandomState(service))
+	c := cc.Config()
+	return c.AuthCodeURL(RandomState(providerKey))
 }
 
-func RandomState(service string) string {
-	return fmt.Sprintf("%s-%v", service, rand.Intn(1000000000))
+func RandomState(providerKey string) string {
+	return fmt.Sprintf("%s-%v", providerKey, rand.Intn(1000000000))
 }
