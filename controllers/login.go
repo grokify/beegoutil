@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"fmt"
-
 	"github.com/astaxie/beego"
 	"github.com/grokify/oauth2more/scim"
 
@@ -46,9 +44,6 @@ func (c *LoginController) Get() {
 }
 
 func (c *LoginController) LoginPage() {
-	for name, _ := range conf.OAuth2Configs.ConfigsMap {
-		fmt.Printf("NAME [%v]\n", name)
-	}
 	data := templates.LoginData{
 		BaseUri:           beego.AppConfig.String("baseuri"),
 		OAuth2Configs:     conf.OAuth2Configs,

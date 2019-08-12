@@ -43,6 +43,7 @@ func (c *Oauth2CallbackController) Get() {
 
 		o2ConfigMore, err := conf.OAuth2Configs.Get(providerKey)
 		if err != nil {
+			fmt.Printf("PROVIDER_KEY [%v]\n", providerKey)
 			panic(fmt.Sprintf("%v OAuth 2.0 Config Error [%v]\n", providerKey, err))
 		}
 		providerType, err := o2ConfigMore.ProviderType()

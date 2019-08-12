@@ -1,11 +1,7 @@
 package conf
 
 import (
-	"fmt"
-	//"strings"
-
 	"github.com/grokify/gotilla/net/beegoutil"
-	//"github.com/grokify/gotilla/type/stringsutil"
 	ms "github.com/grokify/oauth2more/multiservice"
 
 	"github.com/astaxie/beego"
@@ -38,23 +34,7 @@ func (cfg *Config) Logger() *beegoutil.BeegoLogsMore {
 var OAuth2Configs = ms.NewConfigSet()
 
 func GetTokenPath(providerKey string) string {
-	tokenVar := OAuth2TokenCfgValPrefix + providerKey
-	/*
-		tokenVar := ""
-		switch service {
-		case "aha":
-			tokenVar = AhaOauth2TokenPath
-		case "facebook":
-			tokenVar = FacebookOauth2TokenPath
-		case "google":
-			tokenVar = GoogleOauth2TokenPath
-		case "ringcentral":
-			tokenVar = RingcentralOauth2TokenPath
-		default:
-			panic(fmt.Sprintf("Cannot find token for: %v", service))
-			return ""
-		}*/
-	return beego.AppConfig.String(tokenVar)
+	return beego.AppConfig.String(OAuth2TokenCfgValPrefix + providerKey)
 }
 
 func InitSession() {
@@ -62,38 +42,5 @@ func InitSession() {
 }
 
 func InitOAuth2Config() error {
-	err := beegoutil.InitOAuth2Config(OAuth2Configs)
-	fmt.Println(len(OAuth2Configs.ConfigsMap))
-	goog := OAuth2Configs.ConfigsMap["google0"]
-	fmt.Println(goog.AuthUri)
-	if OAuth2Configs.Has("google0") {
-		fmt.Println("GOT_google0")
-	} else {
-		fmt.Println("NO_google0")
-	}
-	return err
-
+	return beegoutil.InitOAuth2Config(OAuth2Configs)
 }
-
-/*
-func InitOAuth2ConfigOld() error {
-	oauth2providersraw := beego.AppConfig.String("oauth2providers")
-	oauth2providers := stringsutil.SplitTrimSpace(oauth2providersraw, ",")
-	for _, providerKey := range oauth2providers {
-		providerKey = strings.TrimSpace(providerKey)
-		if len(providerKey) == 0 {
-			continue
-		}
-		oauth2ConfigParam := "oauth2config" + providerKey
-		configJson := strings.TrimSpace(beego.AppConfig.String(oauth2ConfigParam))
-		if len(configJson) == 0 {
-			return fmt.Errorf("E_NO_CONFIG_FOR_OAUTH_PROVIDER_KEY [%v]", providerKey)
-		}
-		err := OAuth2Configs.AddConfigMoreJson(providerKey, []byte(configJson))
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-*/
