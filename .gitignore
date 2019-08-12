@@ -1,3 +1,6 @@
 _*
 beego-oauth2-demo
-conf/app.conf
+demo1/demo1
+demo1/conf/app.conf
+demo2/demo2
+demo2/conf/app.conf
