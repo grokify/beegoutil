@@ -17,7 +17,7 @@ func (c *LogoutController) Get() {
 	log := cfg.Logger()
 	c.Logger = log.Logger
 
-	conf.InitSession()
+	conf.InitSession(log)
 
 	log.Info("Start Login Controller")
 

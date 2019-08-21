@@ -94,7 +94,7 @@ window.addEventListener("message", receiveMessage, false);
           </a>
           {% endif %}
 
-          {% if data.OAuth2Configs.Has("facebook") %}
+          {% if data.OAuth2Configs.Has("facebook0") %}
           <a class="btn btn-block btn-social btn-facebook" onclick="oauth.loginPopup('facebook'); return false;">
             <span class="fa fa-facebook"></span> Sign in with Facebook
           </a>

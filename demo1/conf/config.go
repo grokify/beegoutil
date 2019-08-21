@@ -37,8 +37,8 @@ func GetTokenPath(providerKey string) string {
 	return beego.AppConfig.String(OAuth2TokenCfgValPrefix + providerKey)
 }
 
-func InitSession() {
-	beegoutil.InitSession("", nil)
+func InitSession(logger *beegoutil.BeegoLogsMore) {
+	beegoutil.InitSession("", nil, logger)
 }
 
 func InitOAuth2Config() error {

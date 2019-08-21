@@ -25,7 +25,7 @@ func (c *LoginController) Get() {
 	if err != nil {
 		log.Infof("ERR [%v]\n", err.Error())
 	}
-	conf.InitSession()
+	conf.InitSession(log)
 
 	s1 := c.GetSession("loggedIn")
 	s2 := c.GetSession("user")

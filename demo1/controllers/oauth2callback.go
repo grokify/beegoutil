@@ -23,11 +23,11 @@ type Oauth2CallbackController struct {
 }
 
 func (c *Oauth2CallbackController) Get() {
-	conf.InitSession()
-
 	cfg := conf.NewConfig()
 	c.Logger = cfg.Logger()
 	log := c.Logger
+
+	conf.InitSession(log)
 
 	log.Info("Start OAuth2Callback Controller")
 
