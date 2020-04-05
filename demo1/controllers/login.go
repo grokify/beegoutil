@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/grokify/oauth2more/multiservice"
 	"github.com/grokify/oauth2more/scim"
 
 	"github.com/grokify/beego-oauth2-demo/demo1/conf"
@@ -48,6 +49,7 @@ func (c *LoginController) LoginPage() {
 		BaseUri:           beego.AppConfig.String("baseuri"),
 		OAuth2Configs:     conf.OAuth2Configs,
 		OAuth2RedirectURI: beego.AppConfig.String("oauth2redirecturi"),
+		OAuth2State:       multiservice.RandomState("demo", true),
 		DemoRepoURI:       templates.DemoRepoURI}
 
 	templates.WriteLoginPage(c.Ctx.ResponseWriter, data)

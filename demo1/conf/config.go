@@ -31,7 +31,7 @@ func (cfg *Config) Logger() *beegoutil.BeegoLogsMore {
 	return cfg.logger
 }
 
-var OAuth2Configs = ms.NewConfigSet()
+var OAuth2Configs = ms.NewConfigMoreSet()
 
 func GetTokenPath(providerKey string) string {
 	return beego.AppConfig.String(OAuth2TokenCfgValPrefix + providerKey)

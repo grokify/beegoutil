@@ -1,9 +1,6 @@
 package templates
 
 import (
-	"fmt"
-	"math/rand"
-
 	ms "github.com/grokify/oauth2more/multiservice"
 )
 
@@ -12,12 +9,14 @@ const (
 )
 
 type LoginData struct {
-	OAuth2Configs     *ms.ConfigSet
+	OAuth2Configs     *ms.ConfigMoreSet
 	BaseUri           string
 	OAuth2RedirectURI string
+	OAuth2State       string
 	DemoRepoURI       string
 }
 
+/*
 func (ld *LoginData) AuthURL(providerKey string) string {
 	cc, err := ld.OAuth2Configs.Get(providerKey)
 	if err != nil {
@@ -30,3 +29,4 @@ func (ld *LoginData) AuthURL(providerKey string) string {
 func RandomState(providerKey string) string {
 	return fmt.Sprintf("%s-%v", providerKey, rand.Intn(1000000000))
 }
+*/

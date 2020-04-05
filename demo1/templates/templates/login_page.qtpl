@@ -19,11 +19,11 @@ function sleep(ms) {
 }
 
 var config = {
-          {% for key, _ := range data.OAuth2Configs.ConfigsMap %}
+          {% for key, o2ConfigMore := range data.OAuth2Configs.ConfigMoreMap %}
 
 {%s= key %}: {
-  authUri: '{%s= data.AuthURL("google0")%}',
-  redirectUri: '{%s= data.OAuth2RedirectURI %}'
+  authUri: '{%s= o2ConfigMore.AuthURL(key + "-" + data.OAuth2State) %}',
+  redirectUri: '{%s= o2ConfigMore.RedirectURL() %}'
 },
           {% endfor %}
 }

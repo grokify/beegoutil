@@ -43,7 +43,7 @@ function sleep(ms) {
 var config = {
           `)
 //line login_page.qtpl:22
-	for key, _ := range data.OAuth2Configs.ConfigsMap {
+	for key, o2ConfigMore := range data.OAuth2Configs.ConfigMoreMap {
 //line login_page.qtpl:22
 		qw422016.N().S(`
 
@@ -54,12 +54,12 @@ var config = {
 		qw422016.N().S(`: {
   authUri: '`)
 //line login_page.qtpl:25
-		qw422016.N().S(data.AuthURL("google0"))
+		qw422016.N().S(o2ConfigMore.AuthURL(key + "-" + data.OAuth2State))
 //line login_page.qtpl:25
 		qw422016.N().S(`',
   redirectUri: '`)
 //line login_page.qtpl:26
-		qw422016.N().S(data.OAuth2RedirectURI)
+		qw422016.N().S(o2ConfigMore.RedirectURL())
 //line login_page.qtpl:26
 		qw422016.N().S(`'
 },
@@ -158,7 +158,7 @@ window.addEventListener("message", receiveMessage, false);
 
           `)
 //line login_page.qtpl:97
-	if data.OAuth2Configs.Has("facebook") {
+	if data.OAuth2Configs.Has("facebook0") {
 //line login_page.qtpl:97
 		qw422016.N().S(`
           <a class="btn btn-block btn-social btn-facebook" onclick="oauth.loginPopup('facebook'); return false;">
