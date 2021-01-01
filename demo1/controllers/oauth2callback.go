@@ -6,15 +6,15 @@ import (
 	"regexp"
 
 	"github.com/astaxie/beego"
-	ju "github.com/grokify/gotilla/encoding/jsonutil"
-	"github.com/grokify/gotilla/net/beegoutil"
+	"github.com/grokify/beegoutil"
 	"github.com/grokify/oauth2more"
 	"github.com/grokify/oauth2more/multiservice"
 	"github.com/grokify/oauth2more/scim"
+	ju "github.com/grokify/simplego/encoding/jsonutil"
 	"golang.org/x/oauth2"
 
-	"github.com/grokify/beego-oauth2-demo/demo1/conf"
-	"github.com/grokify/beego-oauth2-demo/demo1/templates"
+	"github.com/grokify/beegoutil/demo1/conf"
+	"github.com/grokify/beegoutil/demo1/templates"
 )
 
 type Oauth2CallbackController struct {

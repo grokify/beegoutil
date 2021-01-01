@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	_ "github.com/grokify/beego-oauth2-demo/demo1/routers"
+	_ "github.com/grokify/beegoutil/demo1/routers"
 )
 
 func main() {

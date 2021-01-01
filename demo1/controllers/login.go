@@ -5,9 +5,9 @@ import (
 	"github.com/grokify/oauth2more/multiservice"
 	"github.com/grokify/oauth2more/scim"
 
-	"github.com/grokify/beego-oauth2-demo/demo1/conf"
-	"github.com/grokify/beego-oauth2-demo/demo1/templates"
-	"github.com/grokify/gotilla/net/beegoutil"
+	"github.com/grokify/beegoutil"
+	"github.com/grokify/beegoutil/demo1/conf"
+	"github.com/grokify/beegoutil/demo1/templates"
 )
 
 type LoginController struct {

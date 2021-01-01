@@ -1,7 +1,7 @@
 package conf
 
 import (
-	"github.com/grokify/gotilla/net/beegoutil"
+	"github.com/grokify/beegoutil"
 	ms "github.com/grokify/oauth2more/multiservice"
 
 	"github.com/astaxie/beego"

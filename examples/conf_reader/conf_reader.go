@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/grokify/gotilla/fmt/fmtutil"
-	"github.com/grokify/gotilla/os/osutil"
 	ou "github.com/grokify/oauth2more"
 	ms "github.com/grokify/oauth2more/multiservice"
+	"github.com/grokify/simplego/fmt/fmtutil"
+	"github.com/grokify/simplego/os/osutil"
 	"github.com/joho/godotenv"
 )
 

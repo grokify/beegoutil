@@ -4,7 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 
-	"github.com/grokify/beego-oauth2-demo/demo1/conf"
+	"github.com/grokify/beegoutil/demo1/conf"
 )
 
 type LogoutController struct {
