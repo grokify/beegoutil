@@ -1,9 +1,9 @@
 # Beego OAuth 2.0 Demo
 
-[![Build Status][build-status-svg]][build-status-link]
-[![Go Report Card][goreport-svg]][goreport-link]
-[![Docs][docs-godoc-svg]][docs-godoc-link]
-[![License][license-svg]][license-link]
+[![Build Status][build-status-svg]][build-status-url]
+[![Go Report Card][goreport-svg]][goreport-url]
+[![Docs][docs-godoc-svg]][docs-godoc-url]
+[![License][license-svg]][license-url]
 
 A [Beego](https://beego.me/) example app to demo OAuth 2.0 using Google and Facebook. 
 
@@ -77,11 +77,11 @@ App credentials are created an managed using the [Google Developers Console](htt
 1. Create / Select OAuth 2.0 client IDs for "Web application"
 1. Click "Download JSON"
 
- [build-status-svg]: https://api.travis-ci.org/grokify/beego-oauth2-demo.svg?branch=master
- [build-status-link]: https://travis-ci.org/grokify/beego-oauth2-demo
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/beego-oauth2-demo
- [goreport-link]: https://goreportcard.com/report/github.com/grokify/beego-oauth2-demo
- [docs-godoc-svg]: https://img.shields.io/badge/docs-godoc-blue.svg
- [docs-godoc-link]: https://godoc.org/github.com/grokify/beego-oauth2-demo
+ [build-status-svg]: https://github.com/grokify/beegoutil/workflows/build/badge.svg
+ [build-status-url]: https://github.com/grokify/beegoutil/actions
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/beegoutil
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/beegoutil
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/beegoutil
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/beegoutil
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-link]: https://github.com/grokify/beego-oauth2-demo/blob/master/LICENSE.md
+ [license-url]: https://github.com/grokify/beegoutil/blob/master/LICENSE
