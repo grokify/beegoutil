@@ -77,7 +77,7 @@ App credentials are created an managed using the [Google Developers Console](htt
 1. Create / Select OAuth 2.0 client IDs for "Web application"
 1. Click "Download JSON"
 
- [build-status-svg]: https://github.com/grokify/beegoutil/workflows/build/badge.svg
+ [build-status-svg]: https://github.com/grokify/beegoutil/workflows/go%20build/badge.svg
  [build-status-url]: https://github.com/grokify/beegoutil/actions
  [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/beegoutil
  [goreport-url]: https://goreportcard.com/report/github.com/grokify/beegoutil
