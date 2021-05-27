@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	DemoRepoURI = "github.com/grokify/beego-oauth2-demo"
+	DemoRepoURI = "github.com/grokify/beegoutil/demo1"
 )
 
 type LoginData struct {

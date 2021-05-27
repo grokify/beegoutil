@@ -6,13 +6,13 @@ import (
 	"regexp"
 
 	"github.com/astaxie/beego"
-	"github.com/grokify/beegoutil"
 	"github.com/grokify/oauth2more"
 	"github.com/grokify/oauth2more/multiservice"
 	"github.com/grokify/oauth2more/scim"
 	ju "github.com/grokify/simplego/encoding/jsonutil"
 	"golang.org/x/oauth2"
 
+	"github.com/grokify/beegoutil"
 	"github.com/grokify/beegoutil/demo1/conf"
 	"github.com/grokify/beegoutil/demo1/templates"
 )
