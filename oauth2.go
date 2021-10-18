@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/astaxie/beego"
-	ms "github.com/grokify/oauth2more/multiservice"
+	ms "github.com/grokify/goauth/multiservice"
 	"github.com/grokify/simplego/type/stringsutil"
 )
 

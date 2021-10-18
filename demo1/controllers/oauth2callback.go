@@ -6,9 +6,9 @@ import (
 	"regexp"
 
 	"github.com/astaxie/beego"
-	"github.com/grokify/oauth2more"
-	"github.com/grokify/oauth2more/multiservice"
-	"github.com/grokify/oauth2more/scim"
+	"github.com/grokify/goauth"
+	"github.com/grokify/goauth/multiservice"
+	"github.com/grokify/goauth/scim"
 	ju "github.com/grokify/simplego/encoding/jsonutil"
 	"golang.org/x/oauth2"
 
@@ -51,7 +51,7 @@ func (c *Oauth2CallbackController) Get() {
 			panic(fmt.Sprintf("E_OAUTH2_CONFIG_ERR_NO_PROVIDER_KEY [%v] ERR [%v]\n", providerKey, err))
 		}
 
-		var clientUtil oauth2more.OAuth2Util
+		var clientUtil goauth.OAuth2Util
 		clientUtil, err = multiservice.NewClientUtilForProviderType(providerType)
 		if err != nil {
 			panic(fmt.Sprintf("%v CLIENT_UTIL_ERR [%v]\n", providerType, err))
@@ -69,7 +69,7 @@ func (c *Oauth2CallbackController) Get() {
 	//c.TplName = "index.tpl"
 }
 
-func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util oauth2more.OAuth2Util, tokenPath string) {
+func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util goauth.OAuth2Util, tokenPath string) {
 	log := c.Logger
 
 	// Handle the exchange code to initiate a transport.
@@ -84,7 +84,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		panic(err)
 	} else {
 		log.Infof("TOKEN:\n%v\n", string(bytes))
-		err := oauth2more.WriteTokenFile(tokenPath, tok)
+		err := goauth.WriteTokenFile(tokenPath, tok)
 		if err != nil {
 			log.Errorf("E_WRITE_TOKEN_ERROR: PATH [%v] ERROR [%v]\n", tokenPath, err)
 		}

@@ -1,7 +1,7 @@
 package templates
 
 import (
-	"github.com/grokify/oauth2more/scim"
+	"github.com/grokify/goauth/scim"
 )
 
 type LoggedinData struct {

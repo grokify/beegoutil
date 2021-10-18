@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	ou "github.com/grokify/oauth2more"
-	ms "github.com/grokify/oauth2more/multiservice"
+	"github.com/grokify/goauth"
+	ms "github.com/grokify/goauth/multiservice"
 	"github.com/grokify/simplego/fmt/fmtutil"
 	"github.com/grokify/simplego/os/osutil"
 	"github.com/joho/godotenv"
@@ -24,7 +24,7 @@ func main() {
 
 	fmt.Println(os.Getenv("oauth2configgoogle"))
 
-	ac, err := ou.NewAppCredentialsWrapperFromBytes([]byte(os.Getenv("oauth2configgoogle")))
+	ac, err := goauth.NewAppCredentialsWrapperFromBytes([]byte(os.Getenv("oauth2configgoogle")))
 	if err != nil {
 		panic(err)
 	}

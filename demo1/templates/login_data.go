@@ -1,7 +1,7 @@
 package templates
 
 import (
-	ms "github.com/grokify/oauth2more/multiservice"
+	ms "github.com/grokify/goauth/multiservice"
 )
 
 const (

@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/grokify/oauth2more/multiservice"
-	"github.com/grokify/oauth2more/scim"
+	"github.com/grokify/goauth/multiservice"
+	"github.com/grokify/goauth/scim"
 
 	"github.com/grokify/beegoutil"
 	"github.com/grokify/beegoutil/demo1/conf"

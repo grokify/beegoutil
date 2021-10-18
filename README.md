@@ -15,7 +15,7 @@ The following are used in this example app:
 
 * OAuth 2.0
   * [`oauth2`](https://github.com/golang/oauth2)
-  * [`oauth2more`](https://github.com/grokify/oauth2more)
+  * [`goauth`](https://github.com/grokify/goauth)
 * Rendering
   * [Bootstrap](http://getbootstrap.com/)
   * [Font Awesome](http://fontawesome.io/)
