@@ -6,7 +6,7 @@ import (
 
 	"github.com/astaxie/beego"
 	ms "github.com/grokify/goauth/multiservice"
-	"github.com/grokify/simplego/type/stringsutil"
+	"github.com/grokify/mogo/type/stringsutil"
 )
 
 const (

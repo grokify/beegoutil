@@ -3,10 +3,10 @@ package beegoutil
 import (
 	"net/http"
 
-	hum "github.com/grokify/simplego/net/httputilmore"
+	"github.com/grokify/mogo/net/httputilmore"
 )
 
 func WriteHtml(rw http.ResponseWriter, html []byte) (int, error) {
-	rw.Header().Add(hum.HeaderContentType, hum.ContentTypeTextHtmlUtf8)
+	rw.Header().Add(httputilmore.HeaderContentType, httputilmore.ContentTypeTextHtmlUtf8)
 	return rw.Write([]byte(html))
 }

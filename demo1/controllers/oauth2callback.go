@@ -9,7 +9,7 @@ import (
 	"github.com/grokify/goauth"
 	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/goauth/scim"
-	ju "github.com/grokify/simplego/encoding/jsonutil"
+	ju "github.com/grokify/mogo/encoding/jsonutil"
 	"golang.org/x/oauth2"
 
 	"github.com/grokify/beegoutil"

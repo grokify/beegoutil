@@ -7,8 +7,8 @@ import (
 
 	"github.com/grokify/goauth"
 	ms "github.com/grokify/goauth/multiservice"
-	"github.com/grokify/simplego/fmt/fmtutil"
-	"github.com/grokify/simplego/os/osutil"
+	"github.com/grokify/mogo/fmt/fmtutil"
+	"github.com/grokify/mogo/os/osutil"
 	"github.com/joho/godotenv"
 )
 
