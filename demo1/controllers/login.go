@@ -1,9 +1,10 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
+	"github.com/beego/beego/v2/server/web"
 	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/goauth/scim"
+	"github.com/grokify/mogo/type/stringsutil"
 
 	"github.com/grokify/beegoutil"
 	"github.com/grokify/beegoutil/demo1/conf"
@@ -11,7 +12,7 @@ import (
 )
 
 type LoginController struct {
-	beego.Controller
+	web.Controller
 	Logger *beegoutil.BeegoLogsMore
 }
 
@@ -46,9 +47,9 @@ func (c *LoginController) Get() {
 
 func (c *LoginController) LoginPage() {
 	data := templates.LoginData{
-		BaseUri:           beego.AppConfig.String("baseuri"),
+		BaseUri:           stringsutil.EmptyError(web.AppConfig.String("baseuri")),
 		OAuth2Configs:     conf.OAuth2Configs,
-		OAuth2RedirectURI: beego.AppConfig.String("oauth2redirecturi"),
+		OAuth2RedirectURI: stringsutil.EmptyError(web.AppConfig.String("oauth2redirecturi")),
 		OAuth2State:       multiservice.RandomState("demo", true),
 		DemoRepoURI:       templates.DemoRepoURI}
 

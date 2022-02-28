@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/astaxie/beego"
+	"github.com/beego/beego/v2/server/web"
 	"github.com/grokify/goauth"
 	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/goauth/scim"
-	ju "github.com/grokify/mogo/encoding/jsonutil"
+	"github.com/grokify/mogo/encoding/jsonutil"
+	"github.com/grokify/mogo/type/stringsutil"
 	"golang.org/x/oauth2"
 
 	"github.com/grokify/beegoutil"
@@ -18,7 +19,7 @@ import (
 )
 
 type Oauth2CallbackController struct {
-	beego.Controller
+	web.Controller
 	Logger *beegoutil.BeegoLogsMore
 }
 
@@ -63,7 +64,7 @@ func (c *Oauth2CallbackController) Get() {
 		c.Login(authCode, o2ConfigMore.Config(), clientUtil, tokenPath)
 	}
 
-	data := templates.LoginData{BaseUri: beego.AppConfig.String("baseuri")}
+	data := templates.LoginData{BaseUri: stringsutil.EmptyError(web.AppConfig.String("baseuri"))}
 	templates.WriteOAuth2CallbackPage(c.Ctx.ResponseWriter, data)
 	//c.TplName = "blank.tpl"
 	//c.TplName = "index.tpl"
@@ -118,7 +119,7 @@ func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 		if s2 == nil {
 			log.Info("Saved_Session_User_value: is_nil")
 		} else {
-			log.Infof("Saved_Session_User_value: %v", ju.MustMarshalString(s2, true))
+			log.Infof("Saved_Session_User_value: %v", jsonutil.MustMarshalString(s2, true))
 		}
 	}
 }

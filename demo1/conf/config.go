@@ -1,10 +1,9 @@
 package conf
 
 import (
+	"github.com/beego/beego/v2/server/web"
 	"github.com/grokify/beegoutil"
 	ms "github.com/grokify/goauth/multiservice"
-
-	"github.com/astaxie/beego"
 )
 
 const (
@@ -34,7 +33,11 @@ func (cfg *Config) Logger() *beegoutil.BeegoLogsMore {
 var OAuth2Configs = ms.NewConfigMoreSet()
 
 func GetTokenPath(providerKey string) string {
-	return beego.AppConfig.String(OAuth2TokenCfgValPrefix + providerKey)
+	val, err := web.AppConfig.String(OAuth2TokenCfgValPrefix + providerKey)
+	if err != nil {
+		return ""
+	}
+	return val
 }
 
 func InitSession(logger *beegoutil.BeegoLogsMore) {

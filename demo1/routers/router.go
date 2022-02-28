@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/session"
+	"github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web/session"
 
 	"github.com/grokify/beegoutil/demo1/controllers"
 )
@@ -10,9 +10,9 @@ import (
 var globalSessions *session.Manager
 
 func init() {
-	beego.Router("/test", &controllers.MainController{})
-	beego.Router("/", &controllers.LoginController{})
-	beego.Router("/callback", &controllers.Oauth2CallbackController{})
-	beego.Router("/oauth2callback", &controllers.Oauth2CallbackController{})
-	beego.Router("/logout", &controllers.LogoutController{})
+	web.Router("/test", &controllers.MainController{})
+	web.Router("/", &controllers.LoginController{})
+	web.Router("/callback", &controllers.Oauth2CallbackController{})
+	web.Router("/oauth2callback", &controllers.Oauth2CallbackController{})
+	web.Router("/logout", &controllers.LogoutController{})
 }

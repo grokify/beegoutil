@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/astaxie/beego"
+	"github.com/beego/beego/v2/server/web"
 	ms "github.com/grokify/goauth/multiservice"
 	"github.com/grokify/mogo/type/stringsutil"
 )
@@ -15,7 +15,10 @@ const (
 )
 
 func InitOAuth2Config(o2ConfigSet *ms.ConfigMoreSet) error {
-	oauth2providersraw := beego.AppConfig.String(BeegoOauth2ProvidersCfgVar)
+	oauth2providersraw, err := web.AppConfig.String(BeegoOauth2ProvidersCfgVar)
+	if err != nil {
+		return err // Beego v1 to v2 upgrade.
+	}
 	oauth2providers := stringsutil.SplitTrimSpace(oauth2providersraw, ",")
 	for _, providerKey := range oauth2providers {
 		providerKey = strings.TrimSpace(providerKey)
@@ -23,11 +26,15 @@ func InitOAuth2Config(o2ConfigSet *ms.ConfigMoreSet) error {
 			continue
 		}
 		oauth2ConfigParam := BeegoOauth2ConfigCfgVarPrefix + providerKey
-		configJson := strings.TrimSpace(beego.AppConfig.String(oauth2ConfigParam))
+		configJson, err := web.AppConfig.String(oauth2ConfigParam)
+		if err != nil {
+			return err
+		}
+		configJson = strings.TrimSpace(configJson)
 		if len(configJson) == 0 {
 			return fmt.Errorf("E_NO_CONFIG_FOR_OAUTH_PROVIDER_KEY [%v]", providerKey)
 		}
-		err := o2ConfigSet.AddConfigMoreJson(providerKey, []byte(configJson))
+		err = o2ConfigSet.AddConfigMoreJson(providerKey, []byte(configJson))
 		if err != nil {
 			return err
 		}

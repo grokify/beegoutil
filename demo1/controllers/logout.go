@@ -1,14 +1,14 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
+	"github.com/beego/beego/v2/core/logs"
+	"github.com/beego/beego/v2/server/web"
 
 	"github.com/grokify/beegoutil/demo1/conf"
 )
 
 type LogoutController struct {
-	beego.Controller
+	web.Controller
 	Logger *logs.BeeLogger
 }
 

@@ -3,8 +3,8 @@ package beegoutil
 import (
 	"strings"
 
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/session"
+	"github.com/beego/beego/v2/server/web"
+	"github.com/beego/beego/v2/server/web/session"
 	"github.com/grokify/go-scim-client"
 	"github.com/grokify/goauth/multiservice/tokens"
 	"github.com/grokify/goauth/multiservice/tokens/tokensetmemory"
@@ -21,8 +21,8 @@ const (
 func InitSession(sessionProvider string, sessionConfig *session.ManagerConfig, log *BeegoLogsMore) {
 	sessionProvider = strings.TrimSpace(sessionProvider)
 	if len(sessionProvider) == 0 {
-		sessionProvider = strings.TrimSpace(
-			beego.AppConfig.String(BeegoSessionProviderCfgVar))
+		sessionProvider, _ = web.AppConfig.String(BeegoSessionProviderCfgVar)
+		sessionProvider = strings.TrimSpace(sessionProvider)
 		if len(sessionProvider) == 0 {
 			sessionProvider = BeegoSessionProviderDefault
 		}
@@ -36,8 +36,8 @@ func InitSession(sessionProvider string, sessionConfig *session.ManagerConfig, l
 
 	sessionConfig = &session.ManagerConfig{Gclifetime: 3600}
 
-	cfgCookieName := strings.TrimSpace(
-		beego.AppConfig.String(BeegoSessionCookieNameCfgVar))
+	cfgCookieName, _ := web.AppConfig.String(BeegoSessionCookieNameCfgVar)
+	cfgCookieName = strings.TrimSpace(cfgCookieName)
 	if len(cfgCookieName) > 0 {
 		sessionConfig.CookieName = cfgCookieName
 	} else {
@@ -66,20 +66,20 @@ func NewSessionUserInfo() *SessionUserInfo {
 		TokenSet:   tokensetmemory.NewTokenSet()}
 }
 
-func (su *SessionUserInfo) Logout(c *beego.Controller) {
+func (su *SessionUserInfo) Logout(c *web.Controller) {
 	su.User = nil
 	su.IsLoggedIn = false
 	su.TokenSet = nil
 	su.Save(c)
 }
 
-func (su *SessionUserInfo) Save(c *beego.Controller) {
+func (su *SessionUserInfo) Save(c *web.Controller) {
 	c.SetSession(SesUserInfo, su.User)
 	c.SetSession(SesUserIsLoggedIn, su.IsLoggedIn)
 	c.SetSession(SesUserTokenSet, su.TokenSet)
 }
 
-func (su *SessionUserInfo) Load(c *beego.Controller) {
+func (su *SessionUserInfo) Load(c *web.Controller) {
 	s1 := c.GetSession(SesUserIsLoggedIn)
 	s2 := c.GetSession(SesUserInfo)
 	s3 := c.GetSession(SesUserTokenSet)

@@ -3,7 +3,7 @@ package beegoutil
 import (
 	"fmt"
 
-	"github.com/astaxie/beego/logs"
+	"github.com/beego/beego/v2/core/logs"
 )
 
 func NewLoggerAdapterConsole() *logs.BeeLogger {
