@@ -7,6 +7,6 @@ import (
 )
 
 func WriteHtml(rw http.ResponseWriter, html []byte) (int, error) {
-	rw.Header().Add(httputilmore.HeaderContentType, httputilmore.ContentTypeTextHtmlUtf8)
+	rw.Header().Add(httputilmore.HeaderContentType, httputilmore.ContentTypeTextHTMLUtf8)
 	return rw.Write([]byte(html))
 }

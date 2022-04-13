@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/beego/beego/v2/server/web"
-	ms "github.com/grokify/goauth/multiservice"
+	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/mogo/type/stringsutil"
 )
 
@@ -14,7 +14,7 @@ const (
 	BeegoOauth2ConfigCfgVarPrefix string = "oauth2config"
 )
 
-func InitOAuth2Config(o2ConfigSet *ms.ConfigMoreSet) error {
+func InitOAuth2Config(o2ConfigSet *multiservice.ConfigMoreSet) error {
 	oauth2providersraw, err := web.AppConfig.String(BeegoOauth2ProvidersCfgVar)
 	if err != nil {
 		return err // Beego v1 to v2 upgrade.
@@ -34,7 +34,7 @@ func InitOAuth2Config(o2ConfigSet *ms.ConfigMoreSet) error {
 		if len(configJson) == 0 {
 			return fmt.Errorf("E_NO_CONFIG_FOR_OAUTH_PROVIDER_KEY [%v]", providerKey)
 		}
-		err = o2ConfigSet.AddConfigMoreJson(providerKey, []byte(configJson))
+		err = o2ConfigSet.AddConfigMoreJSON(providerKey, []byte(configJson))
 		if err != nil {
 			return err
 		}
