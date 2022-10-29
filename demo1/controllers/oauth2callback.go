@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"regexp"
@@ -74,7 +75,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 	log := c.Logger
 
 	// Handle the exchange code to initiate a transport.
-	tok, err := o2Config.Exchange(oauth2.NoContext, authCode)
+	tok, err := o2Config.Exchange(context.Background(), authCode)
 	if err != nil {
 		log.Error(fmt.Sprintf("%v\n", err))
 		panic(err)
@@ -91,7 +92,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		}
 	}
 
-	o2Util.SetClient(o2Config.Client(oauth2.NoContext, tok))
+	o2Util.SetClient(o2Config.Client(context.Background(), tok))
 
 	scimUser, err := o2Util.GetSCIMUser()
 	if err == nil {

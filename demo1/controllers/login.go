@@ -36,7 +36,7 @@ func (c *LoginController) Get() {
 		c.LoginPage()
 	} else {
 		loggedIn := s1.(bool)
-		if loggedIn == false {
+		if !loggedIn {
 			c.LoginPage()
 		} else {
 			log.Info("I_IS_USER_LOGGED_IN [yes]")
