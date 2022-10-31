@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/beego/beego/v2 v2.0.5
 	github.com/grokify/go-scim-client v0.1.9
-	github.com/grokify/goauth v0.16.3
+	github.com/grokify/goauth v0.16.4
 	github.com/grokify/mogo v0.40.13
 	github.com/joho/godotenv v1.4.0
 	github.com/valyala/quicktemplate v1.7.0
@@ -27,7 +27,7 @@ require (
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
-	github.com/googleapis/gax-go/v2 v2.5.1 // indirect
+	github.com/googleapis/gax-go/v2 v2.6.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/grokify/gohttp v0.2.2 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
@@ -54,10 +54,10 @@ require (
 	golang.org/x/net v0.1.0 // indirect
 	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
-	google.golang.org/api v0.99.0 // indirect
+	google.golang.org/api v0.101.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20221010155953-15ba04fc1c0e // indirect
-	google.golang.org/grpc v1.50.0 // indirect
+	google.golang.org/genproto v0.0.0-20221018160656-63c7b68cfc55 // indirect
+	google.golang.org/grpc v1.50.1 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
