@@ -167,8 +167,8 @@ github.com/grokify/goauth v0.16.5 h1:NiFBWnFQY/3Ol+oTFUrPSuP5bs4YmJrQD8hsZRViT1E
 github.com/grokify/goauth v0.16.5/go.mod h1:CY+vTrG+sBJXwC4D1c8ruOaD4Mr+dQMr/EY764oO80w=
 github.com/grokify/gohttp v0.2.2 h1:bb+LOffbJdwzazuuwMnS320cId02iFFicLwWIGeMD3o=
 github.com/grokify/gohttp v0.2.2/go.mod h1:665NrVNsW1YlgiFbl8Iyl62gEcGZ6CgE2nCsQO6OLYg=
-github.com/grokify/mogo v0.41.2 h1:m1jtsWhp5a6ZTJ0DrwIZerEV0lVPBrIyIVRp8PIW8wk=
-github.com/grokify/mogo v0.41.2/go.mod h1:F2BzVq/EKWBOknixSZhN/V3n2YTxfMuhLwwLRXVblw0=
+github.com/grokify/mogo v0.41.4 h1:eS9bvTa5y70aFiAQEGyASdA/qcYwmhQZZHX2r+WyfQE=
+github.com/grokify/mogo v0.41.4/go.mod h1:F2BzVq/EKWBOknixSZhN/V3n2YTxfMuhLwwLRXVblw0=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.4 h1:YDjusn29QI/Das2iO9M0BHnIbxPeyuCHsjMW+lJfyTc=
