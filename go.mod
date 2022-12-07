@@ -9,7 +9,7 @@ require (
 	github.com/grokify/mogo v0.41.10
 	github.com/joho/godotenv v1.4.0
 	github.com/valyala/quicktemplate v1.7.0
-	golang.org/x/oauth2 v0.2.0
+	golang.org/x/oauth2 v0.3.0
 )
 
 require (
@@ -53,9 +53,9 @@ require (
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.3.0 // indirect
 	golang.org/x/exp v0.0.0-20221126150942-6ab00d035af9 // indirect
-	golang.org/x/net v0.2.0 // indirect
-	golang.org/x/sys v0.2.0 // indirect
-	golang.org/x/text v0.4.0 // indirect
+	golang.org/x/net v0.3.0 // indirect
+	golang.org/x/sys v0.3.0 // indirect
+	golang.org/x/text v0.5.0 // indirect
 	google.golang.org/api v0.103.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6 // indirect
