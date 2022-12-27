@@ -4,9 +4,9 @@ go 1.18
 
 require (
 	github.com/beego/beego/v2 v2.0.7
-	github.com/grokify/go-scim-client v0.1.11
+	github.com/grokify/go-scim-client v0.1.12
 	github.com/grokify/goauth v0.16.7
-	github.com/grokify/mogo v0.43.0
+	github.com/grokify/mogo v0.44.0
 	github.com/joho/godotenv v1.4.0
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.3.0
