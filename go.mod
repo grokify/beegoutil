@@ -5,8 +5,8 @@ go 1.18
 require (
 	github.com/beego/beego/v2 v2.0.7
 	github.com/grokify/go-scim-client v0.1.11
-	github.com/grokify/goauth v0.16.7
-	github.com/grokify/mogo v0.43.0
+	github.com/grokify/goauth v0.17.2
+	github.com/grokify/mogo v0.44.0
 	github.com/joho/godotenv v1.4.0
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.3.0
@@ -17,7 +17,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/apex/gateway v1.1.2 // indirect
-	github.com/aws/aws-lambda-go v1.36.0 // indirect
+	github.com/aws/aws-lambda-go v1.36.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/buaazp/fasthttprouter v0.1.1 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
