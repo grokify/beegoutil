@@ -53,7 +53,7 @@ func (c *LoginController) LoginPage() {
 		OAuth2State:       multiservice.RandomState("demo", true),
 		DemoRepoURI:       templates.DemoRepoURI}
 
-	templates.WriteLoginPage(c.Ctx.ResponseWriter, data)
+	templates.WriteLoginPage(c.Controller.Ctx.ResponseWriter, data)
 }
 
 func (c *LoginController) LoggedinPage(user scim.User) {
@@ -64,5 +64,5 @@ func (c *LoginController) LoggedinPage(user scim.User) {
 		data.PrimaryEmail = user.Emails[0]
 	}
 
-	templates.WriteLoggedinPage(c.Ctx.ResponseWriter, data)
+	templates.WriteLoggedinPage(c.Controller.Ctx.ResponseWriter, data)
 }
