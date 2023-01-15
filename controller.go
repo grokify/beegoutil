@@ -3,7 +3,7 @@ package beegoutil
 import (
 	"net/http"
 
-	"github.com/grokify/mogo/net/httputilmore"
+	"github.com/grokify/mogo/net/http/httputilmore"
 )
 
 func WriteHtml(rw http.ResponseWriter, html []byte) (int, error) {
