@@ -6,7 +6,7 @@ import (
 	"github.com/grokify/mogo/net/http/httputilmore"
 )
 
-func WriteHtml(rw http.ResponseWriter, html []byte) (int, error) {
+func WriteHTML(rw http.ResponseWriter, html []byte) (int, error) {
 	rw.Header().Add(httputilmore.HeaderContentType, httputilmore.ContentTypeTextHTMLUtf8)
-	return rw.Write([]byte(html))
+	return rw.Write(html)
 }

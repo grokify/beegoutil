@@ -10,7 +10,7 @@ const (
 
 type LoginData struct {
 	OAuth2Configs     *ms.ConfigMoreSet
-	BaseUri           string
+	BaseURI           string
 	OAuth2RedirectURI string
 	OAuth2State       string
 	DemoRepoURI       string

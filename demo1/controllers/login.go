@@ -29,8 +29,8 @@ func (c *LoginController) Get() {
 	}
 	conf.InitSession(log)
 
-	s1 := c.GetSession("loggedIn")
-	s2 := c.GetSession("user")
+	s1 := c.Controller.GetSession("loggedIn")
+	s2 := c.Controller.GetSession("user")
 	if s1 == nil || s2 == nil {
 		log.Info("I_IS_USER_LOGGED_IN [no]")
 		c.LoginPage()
@@ -47,7 +47,7 @@ func (c *LoginController) Get() {
 
 func (c *LoginController) LoginPage() {
 	data := templates.LoginData{
-		BaseUri:           stringsutil.EmptyError(web.AppConfig.String("baseuri")),
+		BaseURI:           stringsutil.EmptyError(web.AppConfig.String("baseuri")),
 		OAuth2Configs:     conf.OAuth2Configs,
 		OAuth2RedirectURI: stringsutil.EmptyError(web.AppConfig.String("oauth2redirecturi")),
 		OAuth2State:       multiservice.RandomState("demo", true),

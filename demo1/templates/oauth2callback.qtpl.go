@@ -32,7 +32,7 @@ function receiveMessage(event) {
   console.log("I_GOT_EVENT ["+event.origin+ "]["+event.data+"]");
   if (event.origin !== '`)
 //line oauth2callback.qtpl:11
-	qw422016.N().S(data.BaseUri)
+	qw422016.N().S(data.BaseURI)
 //line oauth2callback.qtpl:11
 	qw422016.N().S(`') {
     return;

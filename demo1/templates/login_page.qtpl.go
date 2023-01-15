@@ -83,12 +83,12 @@ var OAuthCode = function(cfg) {
 
           console.log("BASE_URI: " + '`)
 //line login_page.qtpl:42
-	qw422016.N().S(data.BaseUri)
+	qw422016.N().S(data.BaseURI)
 //line login_page.qtpl:42
 	qw422016.N().S(`');
           popup.postMessage("isoauth2redirectfinished", '`)
 //line login_page.qtpl:43
-	qw422016.N().S(data.BaseUri)
+	qw422016.N().S(data.BaseURI)
 //line login_page.qtpl:43
 	qw422016.N().S(`');
 
@@ -113,7 +113,7 @@ function receiveMessage(event) {
   console.log("RECEIVED ["+event.origin+"]["+event.data+"]");
   if (event.origin !== '`)
 //line login_page.qtpl:64
-	qw422016.N().S(data.BaseUri)
+	qw422016.N().S(data.BaseURI)
 //line login_page.qtpl:64
 	qw422016.N().S(`') {
     return;

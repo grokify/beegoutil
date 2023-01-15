@@ -33,7 +33,7 @@ func (c *Oauth2CallbackController) Get() {
 
 	log.Info("Start OAuth2Callback Controller")
 
-	state := c.GetString("state")
+	state := c.Controller.GetString("state")
 
 	log.Info(fmt.Sprintf("STATE [%v]\n", state))
 
@@ -41,7 +41,7 @@ func (c *Oauth2CallbackController) Get() {
 	if len(m) > 1 {
 		providerKey := m[1]
 		fmt.Printf("SERVICE [%v]\n", providerKey)
-		authCode := c.GetString("code")
+		authCode := c.Controller.GetString("code")
 
 		o2ConfigMore, err := conf.OAuth2Configs.Get(providerKey)
 		if err != nil {
@@ -65,8 +65,8 @@ func (c *Oauth2CallbackController) Get() {
 		c.Login(authCode, o2ConfigMore.Config(), clientUtil, tokenPath)
 	}
 
-	data := templates.LoginData{BaseUri: stringsutil.EmptyError(web.AppConfig.String("baseuri"))}
-	templates.WriteOAuth2CallbackPage(c.Ctx.ResponseWriter, data)
+	data := templates.LoginData{BaseURI: stringsutil.EmptyError(web.AppConfig.String("baseuri"))}
+	templates.WriteOAuth2CallbackPage(c.Controller.Ctx.ResponseWriter, data)
 	//c.TplName = "blank.tpl"
 	//c.TplName = "index.tpl"
 }
@@ -106,17 +106,17 @@ func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 	log := c.Logger
 	bytes, _ := json.Marshal(scimUser)
 	log.Infof("Saving User: %v\n", string(bytes))
-	c.SetSession("user", scimUser)
-	c.SetSession("loggedIn", true)
+	c.Controller.SetSession("user", scimUser)
+	c.Controller.SetSession("loggedIn", true)
 
 	if false { // Verify session store.
-		s1 := c.GetSession("loggedIn")
+		s1 := c.Controller.GetSession("loggedIn")
 		if s1 == nil {
 			log.Info("Saved_Session_value: is_nil")
 		} else {
 			log.Infof("Saved_Session_value: %v", s1)
 		}
-		s2 := c.GetSession("user")
+		s2 := c.Controller.GetSession("user")
 		if s2 == nil {
 			log.Info("Saved_Session_User_value: is_nil")
 		} else {

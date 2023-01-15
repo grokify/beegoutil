@@ -26,15 +26,15 @@ func InitOAuth2Config(o2ConfigSet *multiservice.ConfigMoreSet) error {
 			continue
 		}
 		oauth2ConfigParam := BeegoOauth2ConfigCfgVarPrefix + providerKey
-		configJson, err := web.AppConfig.String(oauth2ConfigParam)
+		configJSON, err := web.AppConfig.String(oauth2ConfigParam)
 		if err != nil {
 			return err
 		}
-		configJson = strings.TrimSpace(configJson)
-		if len(configJson) == 0 {
-			return fmt.Errorf("E_NO_CONFIG_FOR_OAUTH_PROVIDER_KEY [%v]", providerKey)
+		configJSON = strings.TrimSpace(configJSON)
+		if len(configJSON) == 0 {
+			return fmt.Errorf("no config for oauth provider key (%s)", providerKey)
 		}
-		err = o2ConfigSet.AddConfigMoreJSON(providerKey, []byte(configJson))
+		err = o2ConfigSet.AddConfigMoreJSON(providerKey, []byte(configJSON))
 		if err != nil {
 			return err
 		}

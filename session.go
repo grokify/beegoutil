@@ -5,7 +5,7 @@ import (
 
 	"github.com/beego/beego/v2/server/web"
 	"github.com/beego/beego/v2/server/web/session"
-	"github.com/grokify/go-scim-client"
+	scim "github.com/grokify/go-scim-client"
 	"github.com/grokify/goauth/multiservice/tokens"
 	"github.com/grokify/goauth/multiservice/tokens/tokensetmemory"
 )

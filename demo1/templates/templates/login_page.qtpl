@@ -39,8 +39,8 @@ var OAuthCode = function(cfg) {
         var popup      = window.open(authUri, 'windowname1', 'width=800, height=600'); 
         var pollOAuth  = window.setInterval(function() {
 
-          console.log("BASE_URI: " + '{%s= data.BaseUri %}');
-          popup.postMessage("isoauth2redirectfinished", '{%s= data.BaseUri %}');
+          console.log("BASE_URI: " + '{%s= data.BaseURI %}');
+          popup.postMessage("isoauth2redirectfinished", '{%s= data.BaseURI %}');
 
           /*
             try {
@@ -61,7 +61,7 @@ var oauth = new OAuthCode(config);
 
 function receiveMessage(event) {
   console.log("RECEIVED ["+event.origin+"]["+event.data+"]");
-  if (event.origin !== '{%s= data.BaseUri %}') {
+  if (event.origin !== '{%s= data.BaseURI %}') {
     return;
   }
   if (event.data == 'oauth2redirectisfinished') {

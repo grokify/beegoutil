@@ -7,11 +7,11 @@ import (
 )
 
 const (
-	OAuth2TokenCfgValPrefix    = "oauth2tokenpath"
-	AhaOauth2TokenPath         = "oauth2tokenpathaha"
-	GoogleOauth2TokenPath      = "oauth2tokenpathgoogle"
-	FacebookOauth2TokenPath    = "oauth2tokenpathfacebook"
-	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral"
+	OAuth2TokenCfgValPrefix    = "oauth2tokenpath"            // #nosec G101
+	AhaOauth2TokenPath         = "oauth2tokenpathaha"         // #nosec G101
+	GoogleOauth2TokenPath      = "oauth2tokenpathgoogle"      // #nosec G101
+	FacebookOauth2TokenPath    = "oauth2tokenpathfacebook"    // #nosec G101
+	RingcentralOauth2TokenPath = "oauth2tokenpathringcentral" // #nosec G101
 )
 
 type Config struct {

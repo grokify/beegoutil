@@ -21,8 +21,8 @@ func (c *LogoutController) Get() {
 
 	log.Info("Start Login Controller")
 
-	c.SetSession("user", nil)
-	c.SetSession("loggedIn", false)
+	c.Controller.SetSession("user", nil)
+	c.Controller.SetSession("loggedIn", false)
 
-	c.Redirect("/", 302)
+	c.Controller.Redirect("/", 302)
 }
