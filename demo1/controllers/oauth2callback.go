@@ -7,7 +7,7 @@ import (
 	"regexp"
 
 	"github.com/beego/beego/v2/server/web"
-	"github.com/grokify/goauth"
+	"github.com/grokify/goauth/authutil"
 	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/goauth/scim"
 	"github.com/grokify/mogo/encoding/jsonutil"
@@ -53,7 +53,7 @@ func (c *Oauth2CallbackController) Get() {
 			panic(fmt.Sprintf("E_OAUTH2_CONFIG_ERR_NO_PROVIDER_KEY [%v] ERR [%v]\n", providerKey, err))
 		}
 
-		var clientUtil goauth.OAuth2Util
+		var clientUtil authutil.OAuth2Util
 		clientUtil, err = multiservice.NewClientUtilForProviderType(providerType)
 		if err != nil {
 			panic(fmt.Sprintf("%v CLIENT_UTIL_ERR [%v]\n", providerType, err))
@@ -71,7 +71,7 @@ func (c *Oauth2CallbackController) Get() {
 	//c.TplName = "index.tpl"
 }
 
-func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util goauth.OAuth2Util, tokenPath string) {
+func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Config, o2Util authutil.OAuth2Util, tokenPath string) {
 	log := c.Logger
 
 	// Handle the exchange code to initiate a transport.
@@ -86,7 +86,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		panic(err)
 	} else {
 		log.Infof("TOKEN:\n%v\n", string(bytes))
-		err := goauth.WriteTokenFile(tokenPath, tok)
+		err := authutil.WriteTokenFile(tokenPath, tok)
 		if err != nil {
 			log.Errorf("E_WRITE_TOKEN_ERROR: PATH [%v] ERROR [%v]\n", tokenPath, err)
 		}

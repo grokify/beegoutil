@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/grokify/goauth"
-	ms "github.com/grokify/goauth/multiservice"
+	"github.com/grokify/goauth/authutil"
+	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/mogo/fmt/fmtutil"
 	"github.com/grokify/mogo/os/osutil"
 	"github.com/joho/godotenv"
@@ -24,7 +24,7 @@ func main() {
 
 	fmt.Println(os.Getenv("oauth2configgoogle"))
 
-	ac, err := goauth.NewAppCredentialsWrapperFromBytes([]byte(os.Getenv("oauth2configgoogle")))
+	ac, err := authutil.NewAppCredentialsWrapperFromBytes([]byte(os.Getenv("oauth2configgoogle")))
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func main() {
 	env := osutil.Env()
 	fmtutil.PrintJSON(env)
 
-	cfgs, err := ms.EnvOAuth2ConfigMap(env, "oauth2config")
+	cfgs, err := multiservice.EnvOAuth2ConfigMap(env, "oauth2config")
 	if err != nil {
 		panic(err)
 	}
