@@ -71,8 +71,8 @@ github.com/googleapis/gax-go/v2 v2.12.0 h1:A+gCJKdRfqXkr+BIRGtZLibNXf0m1f9E4HG56
 github.com/googleapis/gax-go/v2 v2.12.0/go.mod h1:y+aIqrI5eb1YGMVJfuV3185Ts/D7qKpsEkdD5+I6QGU=
 github.com/grokify/go-scim-client v0.1.15 h1:fuGDsLZTI9cUtqlRwswA009lTOimNrBt3/PdoEPrqhM=
 github.com/grokify/go-scim-client v0.1.15/go.mod h1:fnuVQ1agr1EIM1OwLZLRriG1NXOwZyumTYTSfbs07Ug=
-github.com/grokify/goauth v0.20.1 h1:GvkN8a1z5W7nlYdtqK8uMwyqkStt4wuYrif2wKIr8fc=
-github.com/grokify/goauth v0.20.1/go.mod h1:v+vE9o/YoYwld+kfPaOkCQdnAC95JhMaYDh2jzvhi0I=
+github.com/grokify/goauth v0.20.2 h1:lD1oe1R3AzFdzCLoJOqjvs/r9GOkVTm62HDS/L/OFA0=
+github.com/grokify/goauth v0.20.2/go.mod h1:2kQ55KxapynL7bKgOpXOFvKbMgpHkxUSidj0jL1B0v8=
 github.com/grokify/mogo v0.55.0 h1:lvwsf5VWPvaDNDGqN5rXBCO5m6McyGG8N+PDlpkGMG0=
 github.com/grokify/mogo v0.55.0/go.mod h1:i2ceac5ouNA4/1+TaS+K9/mG1rW2J22KR6r90pQUYE8=
 github.com/hashicorp/golang-lru v1.0.2 h1:dV3g9Z/unq5DpblPpw+Oqcv4dU/1omnb4Ok8iPY6p1c=
