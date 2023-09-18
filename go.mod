@@ -6,7 +6,7 @@ require (
 	github.com/beego/beego/v2 v2.1.1
 	github.com/grokify/go-scim-client v0.1.15
 	github.com/grokify/goauth v0.20.2
-	github.com/grokify/mogo v0.55.0
+	github.com/grokify/mogo v0.56.0
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.12.0
@@ -45,7 +45,7 @@ require (
 	github.com/valyala/fastjson v1.6.4 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
-	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
+	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/net v0.15.0 // indirect
 	golang.org/x/sys v0.12.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
