@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/beego/beego/v2 v2.1.1
-	github.com/grokify/go-scim-client v0.1.15
+	github.com/grokify/go-scim-client v0.1.16
 	github.com/grokify/goauth v0.20.2
 	github.com/grokify/mogo v0.56.0
 	github.com/joho/godotenv v1.5.1
@@ -50,7 +50,7 @@ require (
 	golang.org/x/sys v0.12.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/api v0.138.0 // indirect
-	google.golang.org/appengine v1.6.7 // indirect
+	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230822172742-b8732ec3820d // indirect
 	google.golang.org/grpc v1.57.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
