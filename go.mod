@@ -6,7 +6,7 @@ go 1.21
 
 require (
 	github.com/beego/beego/v2 v2.1.4
-	github.com/grokify/go-scim-client v0.1.17
+	github.com/grokify/go-scim-client v0.1.18
 	github.com/grokify/goauth v0.20.7
 	github.com/grokify/mogo v0.62.3
 	github.com/joho/godotenv v1.5.1

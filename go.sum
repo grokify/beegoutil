@@ -65,8 +65,8 @@ github.com/googleapis/enterprise-certificate-proxy v0.3.2 h1:Vie5ybvEvT75RniqhfF
 github.com/googleapis/enterprise-certificate-proxy v0.3.2/go.mod h1:VLSiSSBs/ksPL8kq3OBOQ6WRI2QnaFynd1DCjZ62+V0=
 github.com/googleapis/gax-go/v2 v2.12.0 h1:A+gCJKdRfqXkr+BIRGtZLibNXf0m1f9E4HG56etFpas=
 github.com/googleapis/gax-go/v2 v2.12.0/go.mod h1:y+aIqrI5eb1YGMVJfuV3185Ts/D7qKpsEkdD5+I6QGU=
-github.com/grokify/go-scim-client v0.1.17 h1:zJXo37FhpTvX+kxWZI3iMoIc9dL1/gvdwVwDWbn76ok=
-github.com/grokify/go-scim-client v0.1.17/go.mod h1:aYIi18VeHlRZOVY6kTIoTAkK2ZroPgVlIHuY+Sidd6c=
+github.com/grokify/go-scim-client v0.1.18 h1:EkJnEpQM4vKec7EjiG/Go/L2ALQXYeXCu80aC53y7+I=
+github.com/grokify/go-scim-client v0.1.18/go.mod h1:M3AQMQMlZ8P6HlmqXhgxaPGidyzIWzqxEltQLY6G7sA=
 github.com/grokify/goauth v0.20.7 h1:qune7kHuyD3R+oXr1mThsZM/A/75kvcHhbiXxFhTX20=
 github.com/grokify/goauth v0.20.7/go.mod h1:ZAb4gkvdgubo/FnjcGGpOpgLogymrJ0eoYvZhhRB24M=
 github.com/grokify/mogo v0.62.3 h1:m5k7RvXoiErR+CJGNvjSD5IjIWh9R8aZq/AgBy4wUC4=
