@@ -8,7 +8,7 @@ require (
 	github.com/beego/beego/v2 v2.1.4
 	github.com/grokify/go-scim-client v0.1.18
 	github.com/grokify/goauth v0.20.7
-	github.com/grokify/mogo v0.62.3
+	github.com/grokify/mogo v0.62.5
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.7.0
 	golang.org/x/oauth2 v0.15.0
