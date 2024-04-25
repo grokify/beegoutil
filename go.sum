@@ -6,8 +6,8 @@ cloud.google.com/go/compute/metadata v0.2.3/go.mod h1:VAV5nSsACxMJvgaAuX6Pk2Aawl
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/andybalholm/brotli v1.0.2/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.3/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
-github.com/beego/beego/v2 v2.2.0 h1:x2yCNL9x74vqAXRdFBw5HCzB8AwownALpBWEOitivow=
-github.com/beego/beego/v2 v2.2.0/go.mod h1:kqiwel3TqpZHYtI08GWnleCtBc0LqtawsmfFDxY9POY=
+github.com/beego/beego/v2 v2.2.1 h1:5RatpEOKnw6sm76hj6lQvEFi4Tco+E21VQomnVB7NsA=
+github.com/beego/beego/v2 v2.2.1/go.mod h1:X4hHhM2AXn0hN2tbyz5X/PD7v5JUdE4IihZApiljpNA=
 github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
