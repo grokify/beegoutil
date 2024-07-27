@@ -10,7 +10,7 @@ require (
 	github.com/grokify/goauth v0.21.3
 	github.com/grokify/mogo v0.64.3
 	github.com/joho/godotenv v1.5.1
-	github.com/valyala/quicktemplate v1.7.0
+	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.20.0
 )
 
