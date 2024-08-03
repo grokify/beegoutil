@@ -5,7 +5,7 @@ go 1.22.0
 toolchain go1.22.3
 
 require (
-	github.com/beego/beego/v2 v2.2.2
+	github.com/beego/beego/v2 v2.3.0
 	github.com/grokify/go-scim-client v0.1.20
 	github.com/grokify/goauth v0.21.7
 	github.com/grokify/mogo v0.64.6
