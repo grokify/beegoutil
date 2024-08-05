@@ -11,7 +11,7 @@ require (
 	github.com/grokify/mogo v0.64.6
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
-	golang.org/x/oauth2 v0.21.0
+	golang.org/x/oauth2 v0.22.0
 )
 
 require (
