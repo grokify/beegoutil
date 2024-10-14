@@ -8,7 +8,7 @@ require (
 	github.com/beego/beego/v2 v2.3.1
 	github.com/grokify/go-scim-client v0.1.21
 	github.com/grokify/goauth v0.22.0
-	github.com/grokify/mogo v0.64.11
+	github.com/grokify/mogo v0.65.0
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.23.0
@@ -50,11 +50,11 @@ require (
 	go.opentelemetry.io/otel v1.29.0 // indirect
 	go.opentelemetry.io/otel/metric v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
-	golang.org/x/crypto v0.27.0 // indirect
-	golang.org/x/exp v0.0.0-20240904232852-e7e105dedf7e // indirect
-	golang.org/x/net v0.29.0 // indirect
-	golang.org/x/sys v0.25.0 // indirect
-	golang.org/x/text v0.18.0 // indirect
+	golang.org/x/crypto v0.28.0 // indirect
+	golang.org/x/exp v0.0.0-20241004190924-225e2abe05e6 // indirect
+	golang.org/x/net v0.30.0 // indirect
+	golang.org/x/sys v0.26.0 // indirect
+	golang.org/x/text v0.19.0 // indirect
 	google.golang.org/api v0.195.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240827150818-7e3bb234dfed // indirect
 	google.golang.org/grpc v1.66.0 // indirect
