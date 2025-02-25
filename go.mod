@@ -9,7 +9,7 @@ require (
 	github.com/grokify/mogo v0.67.9
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
-	golang.org/x/oauth2 v0.26.0
+	golang.org/x/oauth2 v0.27.0
 )
 
 require (
