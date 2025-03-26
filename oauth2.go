@@ -19,7 +19,7 @@ func InitOAuth2Config(o2ConfigSet *multiservice.ConfigMoreSet) error {
 	if err != nil {
 		return err // Beego v1 to v2 upgrade.
 	}
-	oauth2providers := stringsutil.SplitTrimSpace(oauth2providersraw, ",")
+	oauth2providers := stringsutil.SplitTrimSpace(oauth2providersraw, ",", false)
 	for _, providerKey := range oauth2providers {
 		providerKey = strings.TrimSpace(providerKey)
 		if len(providerKey) == 0 {
