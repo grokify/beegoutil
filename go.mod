@@ -1,12 +1,13 @@
 module github.com/grokify/beegoutil
 
 go 1.23.6
+toolchain go1.24.1
 
 require (
 	github.com/beego/beego/v2 v2.3.5
 	github.com/grokify/go-scim-client v0.1.27
 	github.com/grokify/goauth v0.23.8
-	github.com/grokify/mogo v0.68.3
+	github.com/grokify/mogo v0.68.4
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.28.0
@@ -49,7 +50,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.35.0 // indirect
 	golang.org/x/crypto v0.36.0 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
-	golang.org/x/net v0.37.0 // indirect
+	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	google.golang.org/api v0.228.0 // indirect
