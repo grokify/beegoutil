@@ -1,9 +1,10 @@
 module github.com/grokify/beegoutil
 
 go 1.23.6
+toolchain go1.24.1
 
 require (
-	github.com/beego/beego/v2 v2.3.5
+	github.com/beego/beego/v2 v2.3.6
 	github.com/grokify/go-scim-client v0.1.27
 	github.com/grokify/goauth v0.23.8
 	github.com/grokify/mogo v0.68.3
