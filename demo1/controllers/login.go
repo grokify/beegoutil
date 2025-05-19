@@ -46,11 +46,15 @@ func (c *LoginController) Get() {
 }
 
 func (c *LoginController) LoginPage() {
+	var rndState string
+	if randomState, err := multiservice.RandomState("demo", true); err != nil {
+		rndState = randomState
+	}
 	data := templates.LoginData{
 		BaseURI:           stringsutil.EmptyError(web.AppConfig.String("baseuri")),
 		OAuth2Configs:     conf.OAuth2Configs,
 		OAuth2RedirectURI: stringsutil.EmptyError(web.AppConfig.String("oauth2redirecturi")),
-		OAuth2State:       multiservice.RandomState("demo", true),
+		OAuth2State:       rndState,
 		DemoRepoURI:       templates.DemoRepoURI}
 
 	templates.WriteLoginPage(c.Controller.Ctx.ResponseWriter, data)
