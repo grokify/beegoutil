@@ -6,7 +6,7 @@ require (
 	github.com/beego/beego/v2 v2.3.8
 	github.com/grokify/go-scim-client v0.1.28
 	github.com/grokify/goauth v0.23.14
-	github.com/grokify/mogo v0.69.3
+	github.com/grokify/mogo v0.70.0
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.30.0
@@ -30,7 +30,6 @@ require (
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/jessevdk/go-flags v1.6.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/martinlindhe/base36 v1.1.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
