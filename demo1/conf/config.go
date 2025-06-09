@@ -1,6 +1,7 @@
 package conf
 
 import (
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
 	"github.com/grokify/beegoutil"
 	ms "github.com/grokify/goauth/multiservice"
@@ -15,18 +16,18 @@ const (
 )
 
 type Config struct {
-	logger *beegoutil.BeegoLogsMore
+	logger *logs.BeeLogger
 }
 
 func NewConfig() Config {
 	return Config{}
 }
 
-func (cfg *Config) Logger() *beegoutil.BeegoLogsMore {
+func (cfg *Config) Logger() *logs.BeeLogger {
 	if cfg.logger != nil {
 		return cfg.logger
 	}
-	cfg.logger = beegoutil.NewBeegoLogsMoreAdapterConsole()
+	cfg.logger = beegoutil.NewLoggerAdapterConsole()
 	return cfg.logger
 }
 
@@ -40,7 +41,7 @@ func GetTokenPath(providerKey string) string {
 	return val
 }
 
-func InitSession(logger *beegoutil.BeegoLogsMore) {
+func InitSession(logger *logs.BeeLogger) {
 	beegoutil.InitSession("", nil, logger)
 }
 

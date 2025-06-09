@@ -6,7 +6,9 @@ import (
 	"fmt"
 	"regexp"
 
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
+	"github.com/grokify/beegoutil"
 	"github.com/grokify/goauth/authutil"
 	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/goauth/scim"
@@ -14,14 +16,13 @@ import (
 	"github.com/grokify/mogo/type/stringsutil"
 	"golang.org/x/oauth2"
 
-	"github.com/grokify/beegoutil"
 	"github.com/grokify/beegoutil/demo1/conf"
 	"github.com/grokify/beegoutil/demo1/templates"
 )
 
 type Oauth2CallbackController struct {
 	web.Controller
-	Logger *beegoutil.BeegoLogsMore
+	Logger *logs.BeeLogger
 }
 
 func (c *Oauth2CallbackController) Get() {
@@ -85,10 +86,10 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		log.Error(fmt.Sprintf("%v\n", err))
 		panic(err)
 	} else {
-		log.Infof("TOKEN:\n%v\n", string(bytes))
+		log.Info("TOKEN:\n%v\n", string(bytes))
 		err := authutil.WriteTokenFile(tokenPath, tok)
 		if err != nil {
-			log.Errorf("E_WRITE_TOKEN_ERROR: PATH [%v] ERROR [%v]\n", tokenPath, err)
+			log.Error("E_WRITE_TOKEN_ERROR: PATH [%v] ERROR [%v]\n", tokenPath, err)
 		}
 	}
 
@@ -105,22 +106,22 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 	log := c.Logger
 	bytes, _ := json.Marshal(scimUser)
-	log.Infof("Saving User: %v\n", string(bytes))
-	c.Controller.SetSession("user", scimUser)
-	c.Controller.SetSession("loggedIn", true)
+	log.Info("Saving User: %v\n", string(bytes))
+	beegoutil.LogErrorIf(c.Controller.SetSession("user", scimUser), log)
+	beegoutil.LogErrorIf(c.Controller.SetSession("loggedIn", true), log)
 
 	if false { // Verify session store.
 		s1 := c.Controller.GetSession("loggedIn")
 		if s1 == nil {
 			log.Info("Saved_Session_value: is_nil")
 		} else {
-			log.Infof("Saved_Session_value: %v", s1)
+			log.Info("Saved_Session_value: %v", s1)
 		}
 		s2 := c.Controller.GetSession("user")
 		if s2 == nil {
 			log.Info("Saved_Session_User_value: is_nil")
 		} else {
-			log.Infof("Saved_Session_User_value: %v", jsonutil.MustMarshalString(s2, true))
+			log.Info("Saved_Session_User_value: %v", jsonutil.MustMarshalString(s2, true))
 		}
 	}
 }

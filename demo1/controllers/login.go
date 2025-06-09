@@ -1,19 +1,19 @@
 package controllers
 
 import (
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
 	"github.com/grokify/goauth/multiservice"
 	"github.com/grokify/goauth/scim"
 	"github.com/grokify/mogo/type/stringsutil"
 
-	"github.com/grokify/beegoutil"
 	"github.com/grokify/beegoutil/demo1/conf"
 	"github.com/grokify/beegoutil/demo1/templates"
 )
 
 type LoginController struct {
 	web.Controller
-	Logger *beegoutil.BeegoLogsMore
+	Logger *logs.BeeLogger
 }
 
 func (c *LoginController) Get() {
@@ -25,7 +25,7 @@ func (c *LoginController) Get() {
 
 	err := conf.InitOAuth2Config()
 	if err != nil {
-		log.Infof("ERR [%v]\n", err.Error())
+		log.Info("ERR [%v]\n", err.Error())
 	}
 	conf.InitSession(log)
 

@@ -3,6 +3,7 @@ package beegoutil
 import (
 	"strings"
 
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
 	"github.com/beego/beego/v2/server/web/session"
 	scim "github.com/grokify/go-scim-client"
@@ -18,7 +19,7 @@ const (
 )
 
 // InitSession creates a starts session management https://beego.me/docs/module/session.md
-func InitSession(sessionProvider string, sessionConfig *session.ManagerConfig, log *BeegoLogsMore) {
+func InitSession(sessionProvider string, sessionConfig *session.ManagerConfig, log *logs.BeeLogger) {
 	sessionProvider = strings.TrimSpace(sessionProvider)
 	if len(sessionProvider) == 0 {
 		sessionProvider, _ = web.AppConfig.String(BeegoSessionProviderCfgVar)
@@ -66,17 +67,27 @@ func NewSessionUserInfo() *SessionUserInfo {
 		TokenSet:   tokensetmemory.NewTokenSet()}
 }
 
-func (su *SessionUserInfo) Logout(c *web.Controller) {
+func (su *SessionUserInfo) Logout(c *web.Controller, log *logs.BeeLogger) {
 	su.User = nil
 	su.IsLoggedIn = false
 	su.TokenSet = nil
-	su.Save(c)
+	su.Save(c, log)
 }
 
-func (su *SessionUserInfo) Save(c *web.Controller) {
-	c.SetSession(SesUserInfo, su.User)
-	c.SetSession(SesUserIsLoggedIn, su.IsLoggedIn)
-	c.SetSession(SesUserTokenSet, su.TokenSet)
+func (su *SessionUserInfo) Save(c *web.Controller, log *logs.BeeLogger) {
+	su.ErrorLogIf(log, c.SetSession(SesUserInfo, su.User))
+	su.ErrorLogIf(log, c.SetSession(SesUserIsLoggedIn, su.IsLoggedIn))
+	su.ErrorLogIf(log, c.SetSession(SesUserTokenSet, su.TokenSet))
+}
+
+func (su *SessionUserInfo) ErrorLogIf(log *logs.BeeLogger, err error) {
+	if err == nil {
+		return
+	} else if log != nil {
+		log.Error(err.Error())
+	} else {
+		logs.Error(err.Error())
+	}
 }
 
 func (su *SessionUserInfo) Load(c *web.Controller) {

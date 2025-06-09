@@ -1,16 +1,30 @@
 package beegoutil
 
 import (
-	"fmt"
-
 	"github.com/beego/beego/v2/core/logs"
 )
 
 func NewLoggerAdapterConsole() *logs.BeeLogger {
 	log := logs.NewLogger()
-	log.SetLogger(logs.AdapterConsole)
+	err := log.SetLogger(logs.AdapterConsole)
+	if err != nil {
+		logs.Error("failed to configure custom logger: (%s)", err.Error())
+	}
 	return log
 }
+
+func LogErrorIf(err error, log *logs.BeeLogger) {
+	if err == nil {
+		return
+	} else if log != nil {
+		log.Error(err.Error())
+	} else {
+		logs.Error(err.Error())
+	}
+}
+
+/*
+type BeegoLogger logs.BeeLogger
 
 type BeegoLogsMore struct {
 	Logger *logs.BeeLogger
@@ -59,3 +73,4 @@ func (lm *BeegoLogsMore) Critical(s string) {
 func (lm *BeegoLogsMore) Criticalf(format string, a ...interface{}) {
 	lm.Logger.Critical(fmt.Sprintf(format, a...))
 }
+*/
