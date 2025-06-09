@@ -32,15 +32,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmtutil.PrintJSON(cfg)
+	fmtutil.MustPrintJSON(cfg)
 
 	env := osutil.Env()
-	fmtutil.PrintJSON(env)
+	fmtutil.MustPrintJSON(env)
 
 	cfgs, err := multiservice.EnvOAuth2ConfigMap(env, "oauth2config")
 	if err != nil {
 		panic(err)
 	}
-	fmtutil.PrintJSON(cfgs)
+	fmtutil.MustPrintJSON(cfgs)
 	fmt.Println("DONE")
 }
