@@ -1,6 +1,6 @@
 module github.com/grokify/beegoutil
 
-go 1.23.6
+go 1.24.0
 
 require (
 	github.com/beego/beego/v2 v2.3.8
@@ -9,7 +9,7 @@ require (
 	github.com/grokify/mogo v0.70.8
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
-	golang.org/x/oauth2 v0.30.0
+	golang.org/x/oauth2 v0.32.0
 )
 
 require (
