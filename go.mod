@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/beego/beego/v2 v2.3.8
-	github.com/grokify/go-scim-client v0.1.28
+	github.com/grokify/go-scim-client v0.1.31
 	github.com/grokify/goauth v0.23.24
 	github.com/grokify/mogo v0.71.7
 	github.com/joho/godotenv v1.5.1
