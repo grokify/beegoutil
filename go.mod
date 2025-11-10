@@ -6,7 +6,7 @@ require (
 	github.com/beego/beego/v2 v2.3.8
 	github.com/grokify/go-scim-client v0.1.28
 	github.com/grokify/goauth v0.23.24
-	github.com/grokify/mogo v0.71.7
+	github.com/grokify/mogo v0.71.8
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.32.0
@@ -49,7 +49,7 @@ require (
 	golang.org/x/crypto v0.43.0 // indirect
 	golang.org/x/exp v0.0.0-20251023183803-a4bb9ffd2546 // indirect
 	golang.org/x/net v0.46.0 // indirect
-	golang.org/x/sys v0.37.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/text v0.30.0 // indirect
 	google.golang.org/api v0.252.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251014184007-4626949a642f // indirect
