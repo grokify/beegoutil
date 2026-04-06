@@ -1,12 +1,12 @@
 module github.com/grokify/beegoutil
 
-go 1.25.0
+go 1.26.0
 
 require (
 	github.com/beego/beego/v2 v2.3.9
 	github.com/grokify/go-scim-client v0.1.31
 	github.com/grokify/goauth v0.23.29
-	github.com/grokify/mogo v0.74.0
+	github.com/grokify/mogo v0.74.1
 	github.com/joho/godotenv v1.5.1
 	github.com/valyala/quicktemplate v1.8.0
 	golang.org/x/oauth2 v0.36.0
