@@ -81,7 +81,7 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 		log.Error(fmt.Sprintf("%v\n", err))
 		panic(err)
 	}
-	bytes, err := json.Marshal(tok)
+	bytes, err := json.Marshal(tok) //nolint:gosec // G117: OAuth token response per RFC 6749
 	if err != nil {
 		log.Error(fmt.Sprintf("%v\n", err))
 		panic(err)
@@ -105,8 +105,12 @@ func (c *Oauth2CallbackController) Login(authCode string, o2Config *oauth2.Confi
 
 func (c *Oauth2CallbackController) SaveSessionUser(scimUser scim.User) {
 	log := c.Logger
-	bytes, _ := json.Marshal(scimUser)
-	log.Info("Saving User: %v\n", string(bytes))
+	bytes, err := json.Marshal(scimUser) //nolint:gosec // G117: SCIM user for session logging
+	if err != nil {
+		log.Error("Failed to marshal SCIM user: %v", err)
+	} else {
+		log.Info("Saving User: %v\n", string(bytes))
+	}
 	beegoutil.LogErrorIf(c.Controller.SetSession("user", scimUser), log)
 	beegoutil.LogErrorIf(c.Controller.SetSession("loggedIn", true), log)
 
